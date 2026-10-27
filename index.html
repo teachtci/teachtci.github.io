@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - TeachTCI</title>
+    <link rel="icon" type="image/png" href="https://favicons.statusgator.com/UNZSryX8tg2s2hlE.png">
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white h-screen flex flex-col">
+
+    <div class="flex-grow p-4 rounded-lg overflow-auto hide-scrollbar max-w-2xl mx-auto mt-10 w-full">
+        <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">about:blank embedder</h1>
+        
+        <div class="mt-6">
+            <input id="url-target" type="url" placeholder="Enter URL here..." class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-black ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+            
+            <div class="flex py-2">
+                <button id="create-btn" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 mr-2">Create Page</button>
+                <button id="clear-btn" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Clear Input</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 z-50"></div>
+
+    <script>
+        // Simple vanilla JS toast notification helper to mimic vue-sonner behavior
+        function showToast(title, description) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-white text-black px-4 py-3 rounded-md shadow-lg border border-gray-200 transition-all duration-300 transform translate-y-2 opacity-0 flex flex-col";
+            toast.innerHTML = `<span class="font-bold text-sm">${title}</span><span class="text-xs text-gray-600">${description}</span>`;
+            
+            container.appendChild(toast);
+            
+            // Fade in
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        let lastClearedUrl = "";
+
+        // Create Page Logic
+        document.getElementById('create-btn').addEventListener('click', () => {
+            let urlInput = document.getElementById("url-target");
+            let url = urlInput.value.trim();
+            
+            if (!url) {
+                showToast("Error", "URL cannot be empty.");
+                return;
+            }
+            
+            showToast("Page opened!", "The page has been opened in a new tab.");
+
+            if (url.substring(0, 8) !== "https://" && url.substring(0, 7) !== "http://") {
+                url = "https://" + url;
+            } else if (url.substring(0, 7) === "http://") {
+                url = "https://" + url.substring(7);
+            }
+
+            const win = window.open();
+            if (win) {
+                win.document.body.style.margin = "0";
+                win.document.body.style.height = "100vh";
+                let frm = win.document.createElement("iframe");
+                frm.style.border = "none";
+                frm.style.width = "100%";
+                frm.style.height = "100%";
+                frm.style.margin = "0";
+                frm.referrerPolicy = "no-referrer";
+                frm.allow = "fullscreen";
+                frm.src = url;
+                win.document.body.appendChild(frm);
+            }
+        });
+
+        // Clear Input Logic
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            let urlInput = document.getElementById("url-target");
+            let url = urlInput.value;
+            
+            if (!url) {
+                showToast("Error", "Input is already empty.");
+                return;
+            }
+
+            lastClearedUrl = url;
+            urlInput.value = "";
+            
+            // Notification with a quick undo simulation
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-white text-black px-4 py-3 rounded-md shadow-lg border border-gray-200 transition-all duration-300 flex flex-col";
+            toast.innerHTML = `
+                <span class="font-bold text-sm">Input cleared</span>
+                <span class="text-xs text-gray-600">The input has been cleared.</span>
+                <button id="undo-btn" class="mt-2 text-xs bg-blue-600 text-white px-2 py-1 rounded w-fit hover:bg-blue-700">Undo</button>
+            `;
+            
+            container.appendChild(toast);
+
+            toast.querySelector('#undo-btn').addEventListener('click', () => {
+                urlInput.value = lastClearedUrl;
+                toast.remove();
+            });
+
+            setTimeout(() => {
+                if (toast.parentElement) toast.remove();
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
