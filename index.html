@@ -10,7 +10,7 @@
             content="A flip-clock showing the current time and date — a monochrome widget you can embed in Notion or any oEmbed consumer."
         />
 
-        <!-- oEmbed discovery: consumers (e.g. Notion via Iframely) fetch this -->
+        <!-- oEmbed discovery -->
         <link
             rel="alternate"
             type="application/json+oembed"
@@ -24,7 +24,7 @@
         <script type="module" src="/src/widgets/clock/index.ts"></script>
 
         <style>
-            /* Condensed, web-safe display face (no font shipping). */
+            /* Condensed, web-safe display face */
             .clock-num {
                 font-family:
                     Impact, "Haettenschweiler", "Franklin Gothic Bold",
@@ -90,12 +90,13 @@
                         </div>
                     </template>
                 </div>
-                <!-- Clicking this AM/PM element will open the embedder tool -->
+                
+                <!-- AM/PM label: clicking directly here triggers the embedder -->
                 <span
                     id="am-pm-trigger"
                     x-show="parts.meridiem"
-                    class="mb-1 font-mono text-xs uppercase tracking-widest cursor-pointer hover:text-blue-400 transition select-none bg-white/10 px-2 py-1 rounded"
-                    title="Click to open Embedder"
+                    class="mb-1 font-mono text-xs uppercase tracking-widest cursor-pointer hover:text-blue-400 hover:scale-105 transition select-none bg-white/10 px-2.5 py-1 rounded shadow"
+                    title="Click AM or PM to open Embedder"
                     x-text="parts.meridiem"
                 ></span>
             </div>
@@ -108,7 +109,7 @@
             ></p>
         </main>
 
-        <!-- Hidden Embedder View (Activated when AM/PM is clicked) -->
+        <!-- Hidden Embedder View (Activated when AM/PM is pressed) -->
         <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto hide-scrollbar max-w-2xl mx-auto mt-10 w-full z-10">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight">about:blank embedder</h1>
@@ -142,14 +143,16 @@
                 }, 3000);
             }
 
-            // Toggle logic when clicking the AM/PM label
+            // Click listener that catches clicks on the dynamic AM/PM text
             document.addEventListener('click', (e) => {
-                if (e.target && e.target.id === 'am-pm-trigger') {
+                const trigger = e.target.closest('#am-pm-trigger');
+                if (trigger) {
                     document.getElementById('clock-container').classList.add('hidden');
                     document.getElementById('embedder-view').classList.remove('hidden');
                 }
             });
 
+            // Switch back to clock view
             document.getElementById('back-to-clock').addEventListener('click', () => {
                 document.getElementById('embedder-view').classList.add('hidden');
                 document.getElementById('clock-container').classList.remove('hidden');
