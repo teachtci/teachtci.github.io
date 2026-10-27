@@ -35,7 +35,7 @@
     <div id="main-display-container" class="flex-grow flex flex-col items-center justify-center relative p-4">
         
         <!-- Clock & Date Display Box (Time.is style) -->
-        <div id="clock-view" class="flex flex-col items-center cursor-pointer transition-transform duration-200">
+        <div id="clock-view" class="flex flex-col items-center transition-transform duration-200">
             <div class="flex items-baseline space-x-3">
                 <span id="time-main" class="text-7xl md:text-9xl font-light tracking-wider font-mono">00:00</span>
                 <div class="flex flex-col items-start font-mono">
@@ -46,13 +46,15 @@
             <div id="date-display" class="mt-4 text-xl md:text-2xl font-light tracking-widest uppercase opacity-90">
                 LOADING...
             </div>
+            <!-- Toggle button to open the embedder page code -->
+            <button id="open-embedder-btn" class="mt-6 text-xs bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition tracking-wider uppercase">Open Embedder Tool</button>
         </div>
 
-        <!-- Hidden / Embedder Container (Revealed when AM/PM is clicked) -->
-        <div id="embedder-view" class="hidden flex-grow p-4 rounded-lg overflow-auto hide-scrollbar max-w-2xl mx-auto mt-10 w-full z-10 bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl">
+        <!-- Hidden / Embedder Container (Revealed when clicking the button) -->
+        <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto hide-scrollbar max-w-2xl mx-auto mt-10 w-full z-10 bg-black/60 backdrop-blur-md border border-white/10 shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight">about:blank embedder</h1>
-                <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1 rounded transition">Back to Clock</button>
+                <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition">Back to Clock</button>
             </div>
             <div class="mt-6">
                 <input id="url-target" type="url" placeholder="Enter URL here..." class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-black ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" />
@@ -66,7 +68,7 @@
 
     </div>
 
-    <!-- Floating Control Panel (Right Side Sidebar matching requested layout) -->
+    <!-- Floating Control Panel (Right Side Sidebar matching layout) -->
     <div class="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50 bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10 shadow-lg">
         <!-- 1. Heart Button -->
         <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
@@ -150,5 +152,173 @@
         const optWeek = document.getElementById('opt-week');
         const optTabSeconds = document.getElementById('opt-tabseconds');
 
-        // Live Clock Engine
-        
+        // Device/Browser Local Live Clock Engine
+        function updateClock() {
+            const now = new Date(); // Pulls live local device time
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = "";
+
+            if (opt12hr.checked) {
+                ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+            }
+
+            const hh = String(hours).padStart(2, '0');
+            const mm = String(minutes).padStart(2, '0');
+            const ss = String(seconds).padStart(2, '0');
+
+            timeMainEl.textContent = `${hh}:${mm}`;
+            
+            timeAmpmEl.style.display = (opt12hr.checked && optAmpm.checked) ? 'block' : 'none';
+            timeAmpmEl.textContent = ampm;
+
+            timeSecondsEl.style.display = optSeconds.checked ? 'block' : 'none';
+            timeSecondsEl.textContent = ss;
+
+            const optionsDate = { month: 'long', day: 'numeric' };
+            const optionsWeekday = { weekday: 'long' };
+            const dateStr = now.toLocaleDateString(undefined, optionsDate);
+            const weekdayStr = now.toLocaleDateString(undefined, optionsWeekday);
+
+            let dateTextParts = [];
+            if (optWeek.checked) dateTextParts.push(weekdayStr);
+            if (optDate.checked) dateTextParts.push(dateStr);
+            dateDisplayEl.textContent = dateTextParts.join(' - ');
+            dateDisplayEl.style.display = dateTextParts.length > 0 ? 'block' : 'none';
+
+            if (optTabSeconds.checked) {
+                document.title = `${hh}:${mm}:${ss} - Home - TT`;
+            } else {
+                document.title = "Home - TT";
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Instantly displays current time on load
+
+        // Switch between clock and embedder view
+        document.getElementById('open-embedder-btn').addEventListener('click', () => {
+            document.getElementById('clock-view').classList.add('hidden');
+            document.getElementById('embedder-view').classList.remove('hidden');
+        });
+
+        document.getElementById('back-to-clock').addEventListener('click', () => {
+            document.getElementById('embedder-view').classList.add('hidden');
+            document.getElementById('clock-view').classList.remove('hidden');
+        });
+
+        // Heart Button Toggle
+        let isHeartRed = false;
+        const btnHeart = document.getElementById('btn-heart');
+        const heartIcon = document.getElementById('heart-icon');
+        btnHeart.addEventListener('click', () => {
+            isHeartRed = !isHeartRed;
+            if (isHeartRed) {
+                heartIcon.setAttribute('fill', 'currentColor');
+                heartIcon.classList.add('text-red-500');
+                showToast("Favorited", "Added to your favorites!");
+            } else {
+                heartIcon.setAttribute('fill', 'none');
+                heartIcon.classList.remove('text-red-500');
+                showToast("Removed", "Removed from favorites.");
+            }
+        });
+
+        // Fullscreen Toggle
+        document.getElementById('btn-fullscreen').addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // Minimize / Maximize Hybrid View Toggle
+        let isCompact = false;
+        document.getElementById('btn-maximize').addEventListener('click', () => {
+            isCompact = !isCompact;
+            if (isCompact) {
+                timeMainEl.classList.remove('text-7xl', 'md:text-9xl');
+                timeMainEl.classList.add('text-4xl', 'md:text-6xl');
+                showToast("Minimized", "Switched to compact view mode.");
+            } else {
+                timeMainEl.classList.remove('text-4xl', 'md:text-6xl');
+                timeMainEl.classList.add('text-7xl', 'md:text-9xl');
+                showToast("Maximize", "Switched back to normal display view.");
+            }
+        });
+
+        // Settings Modal Controls
+        const settingsModal = document.getElementById('settings-modal');
+        document.getElementById('btn-settings').addEventListener('click', () => {
+            settingsModal.classList.remove('hidden');
+            settingsModal.classList.add('flex');
+        });
+        document.getElementById('close-modal').addEventListener('click', () => {
+            settingsModal.classList.remove('flex');
+            settingsModal.classList.add('hidden');
+        });
+
+        // Theme Switcher
+        const themeSelect = document.getElementById('theme-select');
+        themeSelect.addEventListener('change', (e) => {
+            document.body.className = `${e.target.value} text-white h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300`;
+        });
+
+        // Embedder Functions
+        let lastClearedUrl = "";
+        document.getElementById('create-btn').addEventListener('click', () => {
+            let urlInput = document.getElementById("url-target");
+            let url = urlInput.value.trim();
+            
+            if (!url) {
+                showToast("Error", "URL cannot be empty.");
+                return;
+            }
+            
+            showToast("Page opened!", "The page has been opened in a new tab.");
+
+            if (url.substring(0, 8) !== "https://" && url.substring(0, 7) !== "http://") {
+                url = "https://" + url;
+            } else if (url.substring(0, 7) === "http://") {
+                url = "https://" + url.substring(7);
+            }
+
+            const win = window.open();
+            if (win) {
+                win.document.body.style.margin = "0";
+                win.document.body.style.height = "100vh";
+                let frm = win.document.createElement("iframe");
+                frm.style.border = "none";
+                frm.style.width = "100%";
+                frm.style.height = "100%";
+                frm.style.margin = "0";
+                frm.referrerPolicy = "no-referrer";
+                frm.allow = "fullscreen";
+                frm.src = url;
+                win.document.body.appendChild(frm);
+            }
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            let urlInput = document.getElementById("url-target");
+            let url = urlInput.value;
+            
+            if (!url) {
+                showToast("Error", "Input is already empty.");
+                return;
+            }
+
+            lastClearedUrl = url;
+            urlInput.value = "";
+            showToast("Input cleared", "The input has been cleared.");
+        });
+    </script>
+</body>
+</html>
