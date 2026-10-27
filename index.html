@@ -27,20 +27,20 @@
         <div id="clock-view" class="flex flex-col items-center transition-transform duration-200">
             <div class="flex items-baseline space-x-3">
                 <span id="time-main" class="text-7xl md:text-9xl font-light tracking-wider font-mono">00:00</span>
-                <div class="flex flex-col items-start font-mono">
-                    <!-- Clicking AM/PM opens the embedder -->
-                    <span id="am-pm-trigger" class="text-2xl md:text-4xl font-light cursor-pointer hover:text-blue-400 transition" title="Click to open Embedder">AM</span>
+                <div class="flex flex-col items-center font-mono">
+                    <!-- Clicking AM/PM opens the embedder tool -->
+                    <span id="am-pm-trigger" class="text-2xl md:text-4xl font-light cursor-pointer hover:text-blue-400 transition underline decoration-dotted underline-offset-4" title="Click AM or PM to open Embedder">AM</span>
                     <span id="time-seconds" class="text-xl md:text-3xl font-light opacity-80">00</span>
                 </div>
             </div>
             <div id="date-display" class="mt-4 text-xl md:text-2xl font-light tracking-widest uppercase opacity-90">LOADING...</div>
         </div>
 
-        <!-- Embedder View -->
-        <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto hide-scrollbar max-w-2xl mx-auto mt-10 w-full z-10 bg-black/60 backdrop-blur-md border border-white/10 shadow-2xl">
+        <!-- Embedder View (Hidden by default) -->
+        <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto max-w-2xl mx-auto mt-10 w-full z-10 bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-3xl font-extrabold tracking-tight">about:blank embedder</h1>
-                <button id="back-to-clock" class="text-xs bg-white/25 hover:bg-white/40 px-3 py-1.5 rounded-lg transition font-bold">Back to Clock</button>
+                <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition font-bold">Back to Clock</button>
             </div>
             <div class="mt-6">
                 <input id="url-target" type="url" placeholder="Enter URL here..." class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-black ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" />
@@ -54,7 +54,7 @@
 
     </div>
 
-    <!-- Floating Control Panel -->
+    <!-- Floating Control Panel (Right Side) -->
     <div class="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50 bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10 shadow-lg">
         <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg id="heart-icon" class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
@@ -75,7 +75,7 @@
         <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
             <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
                 <h3 class="font-bold text-lg">Preferences & Themes</h3>
-                <button id="close-modal" class="text-zinc-400 hover:text-white font-bold">&times;</button>
+                <button id="close-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
             </div>
             <div class="flex flex-col gap-3 text-sm">
                 <label class="font-semibold text-zinc-400">Theme Selection</label>
@@ -97,6 +97,7 @@
         </div>
     </div>
 
+    <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 z-50"></div>
 
     <script>
@@ -125,6 +126,7 @@
         const optWeek = document.getElementById('opt-week');
         const optTabSeconds = document.getElementById('opt-tabseconds');
 
+        // Live Clock Engine synced to device time
         function updateClock() {
             const now = new Date();
             let hours = now.getHours();
@@ -167,7 +169,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Switch views
+        // Switch to embedder when clicking AM/PM
         timeAmpmEl.addEventListener('click', () => {
             document.getElementById('clock-view').classList.add('hidden');
             document.getElementById('embedder-view').classList.remove('hidden');
@@ -178,7 +180,7 @@
             document.getElementById('clock-view').classList.remove('hidden');
         });
 
-        // Controls
+        // Heart Button Toggle
         let isHeartRed = false;
         document.getElementById('btn-heart').addEventListener('click', () => {
             isHeartRed = !isHeartRed;
@@ -194,14 +196,16 @@
             }
         });
 
+        // Fullscreen Toggle
         document.getElementById('btn-fullscreen').addEventListener('click', () => {
             if (!document.fullscreenElement) {
-                document.documentElement.requestAsync ? document.documentElement.requestAsync() : document.documentElement.requestFullscreen();
+                document.documentElement.requestFullscreen().catch(err => alert(err.message));
             } else {
                 if (document.exitFullscreen) document.exitFullscreen();
             }
         });
 
+        // Minimize / Maximize View Toggle
         let isCompact = false;
         document.getElementById('btn-maximize').addEventListener('click', () => {
             isCompact = !isCompact;
@@ -216,10 +220,12 @@
             }
         });
 
+        // Settings Modal
         const modal = document.getElementById('settings-modal');
         document.getElementById('btn-settings').addEventListener('click', () => modal.classList.replace('hidden', 'flex'));
         document.getElementById('close-modal').addEventListener('click', () => modal.classList.replace('flex', 'hidden'));
 
+        // Theme Switcher
         document.getElementById('theme-select').addEventListener('change', (e) => {
             document.body.className = `${e.target.value} text-white h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300`;
         });
