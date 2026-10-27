@@ -8,15 +8,14 @@
     <!-- Include Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body.theme-carbon {
-            background-color: #09090b; /* Clean solid dark background with no dots */
+        body {
+            background-color: var(--custom-bg, #09090b);
+            color: var(--custom-text, #ffffff);
+            font-family: var(--custom-font, ui-sans-serif, system-ui, sans-serif);
         }
-        body.theme-dark { background-color: #000000; }
-        body.theme-light { background-color: #f4f4f5; color: #18181b; }
-        body.theme-blue { background-color: #0f172a; }
     </style>
 </head>
-<body class="theme-carbon text-white h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300">
+<body class="h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300">
 
     <!-- Main Display Area -->
     <div class="flex-grow flex flex-col items-center justify-center relative p-4">
@@ -27,7 +26,7 @@
                 <span id="time-main" class="text-7xl md:text-9xl font-light tracking-wider font-mono">00:00</span>
                 <div class="flex flex-col items-center font-mono">
                     <!-- Clicking AM/PM opens the embedder tool -->
-                    <span id="am-pm-trigger" class="text-2xl md:text-4xl font-light cursor-pointer hover:text-blue-400 transition" title="Click AM or PM to open Embedder">AM</span>
+                    <span id="am-pm-trigger" class="text-2xl md:text-4xl font-light cursor-pointer hover:opacity-75 transition" title="Click AM or PM to open Embedder">AM</span>
                     <span id="time-seconds" class="text-xl md:text-3xl font-light opacity-80">00</span>
                 </div>
             </div>
@@ -35,7 +34,7 @@
         </div>
 
         <!-- Embedder View (Hidden by default) -->
-        <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto max-w-2xl mx-auto mt-10 w-full z-10 bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl">
+        <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto max-w-2xl mx-auto mt-10 w-full z-10 bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl text-white">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-3xl font-extrabold tracking-tight">about:blank embedder</h1>
                 <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition font-bold">Back to Clock</button>
@@ -54,37 +53,78 @@
 
     <!-- Floating Control Panel (Right Side) -->
     <div class="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50 bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10 shadow-lg">
+        <!-- 1. Heart Button -->
         <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg id="heart-icon" class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
         </button>
+        <!-- 2. Fullscreen Button -->
         <button id="btn-fullscreen" title="Toggle Fullscreen" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
         </button>
+        <!-- 3. Minimize / Maximize View Button -->
         <button id="btn-maximize" title="Compact / Expand View" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M15 15v4.5m0-4.5h4.5m0 4.5l-5.25-5.25"/></svg>
         </button>
-        <button id="btn-settings" title="Settings & Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
+        <!-- 4. Themes Button (Paint Roller icon matching your image) -->
+        <button id="btn-themes" title="Customize Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+        </button>
+        <!-- 5. Settings / Clock Options Button -->
+        <button id="btn-settings" title="Clock Options" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </button>
     </div>
 
-    <!-- Settings Modal -->
+    <!-- Themes Customization Modal -->
+    <div id="themes-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+                <h3 class="font-bold text-lg">Theme Customizer</h3>
+                <button id="close-themes-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <div class="flex flex-col gap-4 text-sm">
+                <div>
+                    <label class="font-semibold text-zinc-400 block mb-1">Presets</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#000000" data-text="#00ffcc">Cyber Neon</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
+                    </div>
+                </div>
+                <hr class="border-zinc-800">
+                <div class="flex flex-col gap-2">
+                    <label class="font-semibold text-zinc-400">Custom Colors</label>
+                    <div class="flex justify-between items-center">
+                        <span>Background Color:</span>
+                        <input type="color" id="picker-bg" value="#09090b" class="w-10 h-8 rounded bg-transparent cursor-pointer">
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>Text Color:</span>
+                        <input type="color" id="picker-text" value="#ffffff" class="w-10 h-8 rounded bg-transparent cursor-pointer">
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-zinc-400">Font Family</label>
+                    <select id="font-select" class="bg-zinc-800 border border-zinc-700 rounded p-2 text-white">
+                        <option value="ui-sans-serif, system-ui, sans-serif">Standard Sans</option>
+                        <option value="monospace">Monospace</option>
+                        <option value="Impact, sans-serif">Impact / Bold</option>
+                        <option value="Georgia, serif">Serif</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clock Options Modal -->
     <div id="settings-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
         <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
             <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
-                <h3 class="font-bold text-lg">Preferences & Themes</h3>
-                <button id="close-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
+                <h3 class="font-bold text-lg">Clock Options</h3>
+                <button id="close-settings-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
             </div>
             <div class="flex flex-col gap-3 text-sm">
-                <label class="font-semibold text-zinc-400">Theme Selection</label>
-                <select id="theme-select" class="bg-zinc-800 border border-zinc-700 rounded p-2 text-white">
-                    <option value="theme-carbon">Clean Dark</option>
-                    <option value="theme-dark">Solid Black</option>
-                    <option value="theme-light">Light Mode</option>
-                    <option value="theme-blue">Midnight Blue</option>
-                </select>
-                <hr class="border-zinc-800 my-1">
-                <label class="font-semibold text-zinc-400">Clock Options</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-12hr" checked class="rounded bg-zinc-800 border-zinc-700"> 12-Hour Format</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-ampm" checked class="rounded bg-zinc-800 border-zinc-700"> Show AM/PM</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-seconds" checked class="rounded bg-zinc-800 border-zinc-700"> Show Seconds</label>
@@ -124,7 +164,7 @@
         const optWeek = document.getElementById('opt-week');
         const optTabSeconds = document.getElementById('opt-tabseconds');
 
-        // Live Clock Engine synced to device time
+        // Live Clock Engine
         function updateClock() {
             const now = new Date();
             let hours = now.getHours();
@@ -159,9 +199,9 @@
             dateDisplayEl.style.display = dateTextParts.length > 0 ? 'block' : 'none';
 
             if (optTabSeconds.checked) {
-                document.title = `${hh}:${mm}:${ss} - Home - TT`;
+                document.title = `${hh}:${mm}:${ss} - Home - TeachTCI`;
             } else {
-                document.title = "Home - TT";
+                document.title = "Home - TeachTCI";
             }
         }
         setInterval(updateClock, 1000);
@@ -218,14 +258,36 @@
             }
         });
 
-        // Settings Modal
-        const modal = document.getElementById('settings-modal');
-        document.getElementById('btn-settings').addEventListener('click', () => modal.classList.replace('hidden', 'flex'));
-        document.getElementById('close-modal').addEventListener('click', () => modal.classList.replace('flex', 'hidden'));
+        // Modals Control
+        const themesModal = document.getElementById('themes-modal');
+        const settingsModal = document.getElementById('settings-modal');
 
-        // Theme Switcher
-        document.getElementById('theme-select').addEventListener('change', (e) => {
-            document.body.className = `${e.target.value} text-white h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300`;
+        document.getElementById('btn-themes').addEventListener('click', () => themesModal.classList.replace('hidden', 'flex'));
+        document.getElementById('close-themes-modal').addEventListener('click', () => themesModal.classList.replace('flex', 'hidden'));
+
+        document.getElementById('btn-settings').addEventListener('click', () => settingsModal.classList.replace('hidden', 'flex'));
+        document.getElementById('close-settings-modal').addEventListener('click', () => settingsModal.classList.replace('flex', 'hidden'));
+
+        // Theme Customization Logic
+        const pickerBg = document.getElementById('picker-bg');
+        const pickerText = document.getElementById('picker-text');
+        const fontSelect = document.getElementById('font-select');
+
+        function applyTheme(bg, text) {
+            document.documentElement.style.setProperty('--custom-bg', bg);
+            document.documentElement.style.setProperty('--custom-text', text);
+            pickerBg.value = bg;
+            pickerText.value = text;
+        }
+
+        pickerBg.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-bg', e.target.value));
+        pickerText.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-text', e.target.value));
+        fontSelect.addEventListener('change', (e) => document.documentElement.style.setProperty('--custom-font', e.target.value));
+
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                applyTheme(btn.getAttribute('data-bg'), btn.getAttribute('data-text'));
+            });
         });
 
         // Embedder Actions
@@ -248,9 +310,4 @@
         document.getElementById('clear-btn').addEventListener('click', () => {
             const input = document.getElementById("url-target");
             if (!input.value) { showToast("Error", "Input is already empty."); return; }
-            input.value = "";
-            showToast("Input cleared", "The input has been cleared.");
-        });
-    </script>
-</body>
-</html>
+     
