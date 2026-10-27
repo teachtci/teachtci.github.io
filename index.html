@@ -34,7 +34,7 @@
         <!-- Embedder View (Hidden by default) -->
         <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto max-w-2xl mx-auto mt-10 w-full z-10 bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl text-white">
             <div class="flex justify-between items-center mb-4">
-                <h1 class="text-3xl font-extrabold tracking-tight">about:blank embedder</h1>
+                <h1 class="text-3xl font-extrabold tracking-tight">embedder</h1>
                 <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition font-bold">Back to Clock</button>
             </div>
             <div class="mt-6">
@@ -70,19 +70,23 @@
 
     <!-- Themes Modal -->
     <div id="themes-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
+        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
                 <h3 class="font-bold text-lg">Theme Customizer</h3>
                 <button id="close-themes-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
             </div>
             <div class="flex flex-col gap-4 text-sm">
                 <div>
-                    <label class="font-semibold text-zinc-400 block mb-1">Presets</label>
+                    <label class="font-semibold text-zinc-400 block mb-2">Preset Themes</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#000000" data-text="#00ffcc">Cyber Neon</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#000000" data-text="#00ffcc">Matrix Green</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#181825" data-text="#cba6f7">Purple Dream</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#280d0f" data-text="#fca5a5">Sunset Red</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#1c1917" data-text="#fde047">Solarized Gold</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#064e3b" data-text="#6ee7b7">Emerald Forest</button>
                     </div>
                 </div>
                 <hr class="border-zinc-800">
@@ -198,7 +202,6 @@
             }
         }
         
-        // Run immediately so there's zero delay, then update every second
         updateClock();
         setInterval(updateClock, 1000);
 
@@ -291,16 +294,4 @@
                 let frm = win.document.createElement("iframe");
                 frm.style.border = "none"; frm.style.width = "100%"; frm.style.height = "100%";
                 frm.referrerPolicy = "no-referrer"; frm.allow = "fullscreen"; frm.src = url;
-                win.document.body.appendChild(frm);
-            }
-        });
-
-        document.getElementById('clear-btn').addEventListener('click', () => {
-            const input = document.getElementById("url-target");
-            if (!input.value) { showToast("Error", "Input is already empty."); return; }
-            input.value = "";
-            showToast("Input cleared", "The input has been cleared.");
-        });
-    </script>
-</body>
-</html>
+               
