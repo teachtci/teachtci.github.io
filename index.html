@@ -65,7 +65,7 @@
         <button id="btn-maximize" title="Compact / Expand View" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M15 15v4.5m0-4.5h4.5m0 4.5l-5.25-5.25"/></svg>
         </button>
-        <!-- 4. Themes Button (Paint Roller icon matching your image) -->
+        <!-- 4. Separate Themes Button (Paint Roller Icon) -->
         <button id="btn-themes" title="Customize Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
         </button>
@@ -164,7 +164,7 @@
         const optWeek = document.getElementById('opt-week');
         const optTabSeconds = document.getElementById('opt-tabseconds');
 
-        // Live Clock Engine
+        // Live Clock Engine synced to device time
         function updateClock() {
             const now = new Date();
             let hours = now.getHours();
@@ -309,5 +309,4 @@
 
         document.getElementById('clear-btn').addEventListener('click', () => {
             const input = document.getElementById("url-target");
-            if (!input.value) { showToast("Error", "Input is already empty."); return; }
-     
+            if (!input.value) { showToast("Error", "Input is already empty."); retu
