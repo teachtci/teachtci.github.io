@@ -6,15 +6,11 @@
     <title>Home - TeachTCI</title>
     <link rel="icon" type="image/png" href="https://favicons.statusgator.com/UNZSryX8tg2s2hlE.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: var(--custom-bg, #09090b);
             color: var(--custom-text, #ffffff);
-            font-family: var(--custom-font, 'Lexend', sans-serif);
-        }
-        .clock-glow {
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+            font-family: var(--custom-font, ui-sans-serif, system-ui, sans-serif);
         }
     </style>
 </head>
@@ -23,16 +19,16 @@
     <!-- Main Display Area -->
     <div class="flex-grow flex flex-col items-center justify-center relative p-4">
         
-        <!-- Custom Local Clock View -->
-        <div id="clock-view" class="flex flex-col items-center transition-transform duration-300 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl px-12 py-9 rounded-3xl shadow-2xl">
-            <div class="flex items-baseline space-x-4">
-                <span id="time-main" class="text-7xl md:text-9xl font-extrabold tracking-tight clock-glow">--:--</span>
-                <div class="flex flex-col items-start justify-center h-full pb-2">
-                    <span id="am-pm-trigger" class="text-xl md:text-3xl font-bold cursor-pointer hover:text-blue-400 transition" title="Click AM or PM to open Embedder">--</span>
-                    <span id="time-seconds" class="text-lg md:text-2xl font-medium opacity-60">--</span>
+        <!-- Clock View -->
+        <div id="clock-view" class="flex flex-col items-center transition-transform duration-200">
+            <div class="flex items-baseline space-x-3">
+                <span id="time-main" class="text-7xl md:text-9xl font-light tracking-wider font-mono">00:00</span>
+                <div class="flex flex-col items-center font-mono">
+                    <span id="am-pm-trigger" class="text-2xl md:text-4xl font-light cursor-pointer hover:opacity-75 transition" title="Click AM or PM to open Embedder">AM</span>
+                    <span id="time-seconds" class="text-xl md:text-3xl font-light opacity-80">00</span>
                 </div>
             </div>
-            <div id="date-display" class="mt-4 text-lg md:text-xl font-semibold tracking-widest uppercase opacity-75">LOADING...</div>
+            <div id="date-display" class="mt-4 text-xl md:text-2xl font-light tracking-widest uppercase opacity-90">LOADING...</div>
         </div>
 
         <!-- Embedder View (Hidden by default) -->
@@ -74,23 +70,19 @@
 
     <!-- Themes Modal -->
     <div id="themes-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white max-h-[90vh] overflow-y-auto">
+        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
             <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
                 <h3 class="font-bold text-lg">Theme Customizer</h3>
                 <button id="close-themes-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
             </div>
             <div class="flex flex-col gap-4 text-sm">
                 <div>
-                    <label class="font-semibold text-zinc-400 block mb-2">Preset Themes</label>
+                    <label class="font-semibold text-zinc-400 block mb-1">Presets</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#000000" data-text="#00ffcc">Matrix Green</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#181825" data-text="#cba6f7">Purple Dream</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#280d0f" data-text="#fca5a5">Sunset Red</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#1c1917" data-text="#fde047">Solarized Gold</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#064e3b" data-text="#6ee7b7">Emerald Forest</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#000000" data-text="#00ffcc">Cyber Neon</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
                     </div>
                 </div>
                 <hr class="border-zinc-800">
@@ -108,189 +100,9 @@
                 <div class="flex flex-col gap-1">
                     <label class="font-semibold text-zinc-400">Font Family</label>
                     <select id="font-select" class="bg-zinc-800 border border-zinc-700 rounded p-2 text-white">
-                        <option value="'Lexend', sans-serif">Lexend</option>
                         <option value="ui-sans-serif, system-ui, sans-serif">Standard Sans</option>
                         <option value="monospace">Monospace</option>
                         <option value="Impact, sans-serif">Impact / Bold</option>
                         <option value="Georgia, serif">Serif</option>
                     </select>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Clock Options Modal -->
-    <div id="settings-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
-            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
-                <h3 class="font-bold text-lg">Clock Options</h3>
-                <button id="close-settings-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
-            </div>
-            <div class="flex flex-col gap-3 text-sm">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-12hr" checked class="rounded bg-zinc-800 border-zinc-700"> 12-Hour Format</label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-ampm" checked class="rounded bg-zinc-800 border-zinc-700"> Show AM/PM</label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-seconds" checked class="rounded bg-zinc-800 border-zinc-700"> Show Seconds</label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-date" checked class="rounded bg-zinc-800 border-zinc-700"> Show Date</label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-week" checked class="rounded bg-zinc-800 border-zinc-700"> Show Week / Day</label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-tabseconds" class="rounded bg-zinc-800 border-zinc-700"> Tab Title Seconds</label>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 z-50"></div>
-
-    <script>
-        function showToast(title, description) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = "bg-white text-black px-4 py-3 rounded-md shadow-lg border border-gray-200 transition-all duration-300 transform translate-y-2 opacity-0 flex flex-col";
-            toast.innerHTML = `<span class="font-bold text-sm">${title}</span><span class="text-xs text-gray-600">${description}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        const timeMainEl = document.getElementById('time-main');
-        const timeAmpmEl = document.getElementById('am-pm-trigger');
-        const timeSecondsEl = document.getElementById('time-seconds');
-        const dateDisplayEl = document.getElementById('date-display');
-        
-        const opt12hr = document.getElementById('opt-12hr');
-        const optAmpm = document.getElementById('opt-ampm');
-        const optSeconds = document.getElementById('opt-seconds');
-        const optDate = document.getElementById('opt-date');
-        const optWeek = document.getElementById('opt-week');
-        const optTabSeconds = document.getElementById('opt-tabseconds');
-
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            let seconds = now.getSeconds();
-            let ampm = "";
-
-            if (opt12hr.checked) {
-                ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12;
-            }
-
-            const hh = String(hours).padStart(2, '0');
-            const mm = String(minutes).padStart(2, '0');
-            const ss = String(seconds).padStart(2, '0');
-
-            timeMainEl.textContent = `${hh}:${mm}`;
-            timeAmpmEl.style.display = (opt12hr.checked && optAmpm.checked) ? 'inline-block' : 'none';
-            timeAmpmEl.textContent = ampm;
-
-            timeSecondsEl.style.display = optSeconds.checked ? 'block' : 'none';
-            timeSecondsEl.textContent = ss;
-
-            const dateStr = now.toLocaleDateString(undefined, { month: 'long', day: 'numeric' });
-            const weekdayStr = now.toLocaleDateString(undefined, { weekday: 'long' });
-
-            let dateTextParts = [];
-            if (optWeek.checked) dateTextParts.push(weekdayStr);
-            if (optDate.checked) dateTextParts.push(dateStr);
-            dateDisplayEl.textContent = dateTextParts.join(' - ');
-            dateDisplayEl.style.display = dateTextParts.length > 0 ? 'block' : 'none';
-
-            if (optTabSeconds.checked) {
-                document.title = `${hh}:${mm}:${ss} - Home - TeachTCI`;
-            } else {
-                document.title = "Home - TeachTCI";
-            }
-        }
-        
-        // Force immediate update upon execution
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        timeAmpmEl.addEventListener('click', () => {
-            document.getElementById('clock-view').classList.add('hidden');
-            document.getElementById('embedder-view').classList.remove('hidden');
-        });
-
-        document.getElementById('back-to-clock').addEventListener('click', () => {
-            document.getElementById('embedder-view').classList.add('hidden');
-            document.getElementById('clock-view').classList.remove('hidden');
-        });
-
-        let isHeartRed = false;
-        document.getElementById('btn-heart').addEventListener('click', () => {
-            isHeartRed = !isHeartRed;
-            const icon = document.getElementById('heart-icon');
-            if (isHeartRed) {
-                icon.setAttribute('fill', 'currentColor');
-                icon.classList.add('text-red-500');
-                showToast("Favorited", "Added to favorites!");
-            } else {
-                icon.setAttribute('fill', 'none');
-                icon.classList.remove('text-red-500');
-                showToast("Removed", "Removed from favorites.");
-            }
-        });
-
-        document.getElementById('btn-fullscreen').addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => alert(err.message));
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen();
-            }
-        });
-
-        let isCompact = false;
-        document.getElementById('btn-maximize').addEventListener('click', () => {
-            isCompact = !isCompact;
-            if (isCompact) {
-                timeMainEl.classList.replace('text-7xl', 'text-4xl');
-                timeMainEl.classList.replace('md:text-9xl', 'md:text-6xl');
-                showToast("Minimized", "Compact view enabled.");
-            } else {
-                timeMainEl.classList.replace('text-4xl', 'text-7xl');
-                timeMainEl.classList.replace('md:text-6xl', 'md:text-9xl');
-                showToast("Maximize", "Normal view restored.");
-            }
-        });
-
-        const themesModal = document.getElementById('themes-modal');
-        const settingsModal = document.getElementById('settings-modal');
-
-        document.getElementById('btn-themes').addEventListener('click', () => themesModal.classList.replace('hidden', 'flex'));
-        document.getElementById('close-themes-modal').addEventListener('click', () => themesModal.classList.replace('flex', 'hidden'));
-
-        document.getElementById('btn-settings').addEventListener('click', () => settingsModal.classList.replace('hidden', 'flex'));
-        document.getElementById('close-settings-modal').addEventListener('click', () => settingsModal.classList.replace('flex', 'hidden'));
-
-        const pickerBg = document.getElementById('picker-bg');
-        const pickerText = document.getElementById('picker-text');
-        const fontSelect = document.getElementById('font-select');
-
-        function applyTheme(bg, text) {
-            document.documentElement.style.setProperty('--custom-bg', bg);
-            document.documentElement.style.setProperty('--custom-text', text);
-            pickerBg.value = bg;
-            pickerText.value = text;
-        }
-
-        pickerBg.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-bg', e.target.value));
-        pickerText.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-text', e.target.value));
-        fontSelect.addEventListener('change', (e) => document.documentElement.style.setProperty('--custom-font', e.target.value));
-
-        document.querySelectorAll('.preset-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                applyTheme(btn.getAttribute('data-bg'), btn.getAttribute('data-text'));
-            });
-        });
-
-        document.getElementById('create-btn').addEventListener('click', () => {
-            let url = document.getElementById("url-target").value.trim();
-            if (!url) { showToast("Error", "URL cannot be empty."); return; }
-            showToast("Page opened!", "The page has been opened in a new tab.");
-            if (!url.startsWith("http://") && !url.startsWith("https://")) url = "https://" + url;
-            const win = window.open();
-            if (
