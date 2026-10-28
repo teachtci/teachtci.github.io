@@ -370,19 +370,3 @@
     </script>
 </body>
 </html>
-
-            
-            container.appendChild(toast);
-
-            toast.querySelector('#undo-btn').addEventListener('click', () => {
-                urlInput.value = lastClearedUrl;
-                toast.remove();
-            });
-
-            setTimeout(() => {
-                if (toast.parentElement) toast.remove();
-            }, 4000);
-        });
-    </script>
-</body>
-</html>
