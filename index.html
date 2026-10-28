@@ -12,9 +12,8 @@
             color: var(--custom-text, #ffffff);
             font-family: var(--custom-font, ui-sans-serif, system-ui, sans-serif);
         }
-        /* Sleek modern glow for the clock display */
         .clock-glow {
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
@@ -23,8 +22,8 @@
     <!-- Main Display Area -->
     <div class="flex-grow flex flex-col items-center justify-center relative p-4">
         
-        <!-- Clock View (Redesigned with glassmorphism card & glow) -->
-        <div id="clock-view" class="flex flex-col items-center transition-transform duration-300 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl px-10 py-8 rounded-3xl shadow-2xl">
+        <!-- Custom Local Clock View -->
+        <div id="clock-view" class="flex flex-col items-center transition-transform duration-300 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl px-12 py-9 rounded-3xl shadow-2xl">
             <div class="flex items-baseline space-x-4">
                 <span id="time-main" class="text-7xl md:text-9xl font-extrabold tracking-tight font-mono clock-glow">00:00</span>
                 <div class="flex flex-col items-start justify-center font-mono h-full pb-2">
@@ -294,4 +293,5 @@
             if (win) {
                 win.document.body.style.margin = "0";
                 win.document.body.style.height = "100vh";
-       
+                let frm = win.document.createElement("iframe");
+                frm.style.bo
