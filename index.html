@@ -12,6 +12,10 @@
             color: var(--custom-text, #ffffff);
             font-family: var(--custom-font, ui-sans-serif, system-ui, sans-serif);
         }
+        /* Sleek modern glow for the clock display */
+        .clock-glow {
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+        }
     </style>
 </head>
 <body class="h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300">
@@ -19,16 +23,16 @@
     <!-- Main Display Area -->
     <div class="flex-grow flex flex-col items-center justify-center relative p-4">
         
-        <!-- Clock View -->
-        <div id="clock-view" class="flex flex-col items-center transition-transform duration-200">
-            <div class="flex items-baseline space-x-3">
-                <span id="time-main" class="text-7xl md:text-9xl font-light tracking-wider font-mono">00:00</span>
-                <div class="flex flex-col items-center font-mono">
-                    <span id="am-pm-trigger" class="text-2xl md:text-4xl font-light cursor-pointer hover:opacity-75 transition" title="Click AM or PM to open Embedder">AM</span>
-                    <span id="time-seconds" class="text-xl md:text-3xl font-light opacity-80">00</span>
+        <!-- Clock View (Redesigned with glassmorphism card & glow) -->
+        <div id="clock-view" class="flex flex-col items-center transition-transform duration-300 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl px-10 py-8 rounded-3xl shadow-2xl">
+            <div class="flex items-baseline space-x-4">
+                <span id="time-main" class="text-7xl md:text-9xl font-extrabold tracking-tight font-mono clock-glow">00:00</span>
+                <div class="flex flex-col items-start justify-center font-mono h-full pb-2">
+                    <span id="am-pm-trigger" class="text-xl md:text-3xl font-bold cursor-pointer hover:text-blue-400 transition" title="Click AM or PM to open Embedder">AM</span>
+                    <span id="time-seconds" class="text-lg md:text-2xl font-medium opacity-60">00</span>
                 </div>
             </div>
-            <div id="date-display" class="mt-4 text-xl md:text-2xl font-light tracking-widest uppercase opacity-90">LOADING...</div>
+            <div id="date-display" class="mt-4 text-lg md:text-xl font-semibold tracking-widest uppercase opacity-75">LOADING...</div>
         </div>
 
         <!-- Embedder View (Hidden by default) -->
@@ -201,7 +205,6 @@
             }
         }
         
-        // Execute immediately on script load so it never stays stuck
         updateClock();
         setInterval(updateClock, 1000);
 
@@ -291,7 +294,4 @@
             if (win) {
                 win.document.body.style.margin = "0";
                 win.document.body.style.height = "100vh";
-                let frm = win.document.createElement("iframe");
-                frm.style.border = "none"; frm.style.width = "100%"; frm.style.height = "100%";
-                frm.referrerPolicy = "no-referrer"; frm.allow = "fullscreen"; frm.src = url;
-              
+       
