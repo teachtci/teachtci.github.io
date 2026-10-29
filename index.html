@@ -33,34 +33,20 @@
                 </div>
             </div>
             <div id="date-display" class="mt-4 text-lg md:text-xl font-semibold tracking-widest uppercase opacity-75">Loading Date...</div>
-            <button id="toggle-stopwatch-mode" class="mt-4 text-xs bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md transition text-zinc-300 cursor-pointer">Switch to Stopwatch</button>
-        </div>
-
-        <!-- Stopwatch View (Hidden by default) -->
-        <div id="stopwatch-view" class="hidden flex flex-col items-center transition-transform duration-300 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl px-12 py-9 rounded-3xl shadow-2xl">
-            <div class="flex items-baseline space-x-4">
-                <span id="sw-main" class="text-7xl md:text-9xl font-extrabold tracking-tight clock-glow">00:00</span>
-                <span id="sw-ms" class="text-lg md:text-2xl font-medium opacity-60">.00</span>
-            </div>
-            <div class="mt-6 flex gap-3">
-                <button id="sw-start" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition cursor-pointer">Start</button>
-                <button id="sw-reset" class="bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition cursor-pointer">Reset</button>
-            </div>
-            <button id="toggle-clock-mode" class="mt-4 text-xs bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md transition text-zinc-300 cursor-pointer">Back to Clock</button>
         </div>
 
         <!-- Embedder View (Hidden by default) -->
         <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto max-w-2xl mx-auto mt-10 w-full z-10 bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl text-white">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-3xl font-extrabold tracking-tight">embedder</h1>
-                <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition font-bold cursor-pointer">Back to Dashboard</button>
+                <button id="back-to-clock" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition font-bold">Back to Clock</button>
             </div>
             <div class="mt-6">
                 <input id="url-target" type="url" placeholder="Enter URL here and press Enter..." class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-black ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" />
                 
                 <div class="flex py-2 mt-2">
-                    <button id="create-btn" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-zinc-700 text-white hover:bg-zinc-600 h-10 px-4 py-2 mr-2 transition cursor-pointer">Create Page</button>
-                    <button id="clear-btn" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-zinc-800 text-white hover:bg-zinc-700 h-10 px-4 py-2 transition cursor-pointer">Clear Input</button>
+                    <button id="create-btn" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-zinc-700 text-white hover:bg-zinc-600 h-10 px-4 py-2 mr-2 transition">Create Page</button>
+                    <button id="clear-btn" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-zinc-800 text-white hover:bg-zinc-700 h-10 px-4 py-2 transition">Clear Input</button>
                 </div>
             </div>
         </div>
@@ -69,38 +55,21 @@
 
     <!-- Floating Control Panel -->
     <div class="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50 bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10 shadow-lg">
-        <button id="btn-font" title="Cycle Font Family" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white font-bold text-sm cursor-pointer">
-            Aa
-        </button>
-        <button id="btn-notes" title="Quick Notes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg>
-        </button>
-        <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
+        <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg id="heart-icon" class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
         </button>
-        <button id="btn-fullscreen" title="Toggle Fullscreen" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
+        <button id="btn-fullscreen" title="Toggle Fullscreen" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
         </button>
-        <button id="btn-maximize" title="Compact / Expand View" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
+        <button id="btn-maximize" title="Compact / Expand View" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M15 15v4.5m0-4.5h4.5m0 4.5l-5.25-5.25"/></svg>
         </button>
-        <button id="btn-themes" title="Customize Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
+        <button id="btn-themes" title="Customize Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
         </button>
-        <button id="btn-settings" title="Clock Options" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
+        <button id="btn-settings" title="Clock Options" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </button>
-    </div>
-
-    <!-- Notes Modal -->
-    <div id="notes-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
-            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
-                <h3 class="font-bold text-lg">Quick Notes</h3>
-                <button id="close-notes-modal" class="text-zinc-400 hover:text-white font-bold text-xl cursor-pointer">&times;</button>
-            </div>
-            <textarea id="quick-notes-area" placeholder="Jot down notes or homework reminders here..." class="w-full h-40 bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
-        </div>
     </div>
 
     <!-- Themes Modal -->
@@ -108,20 +77,20 @@
         <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
                 <h3 class="font-bold text-lg">Theme Customizer</h3>
-                <button id="close-themes-modal" class="text-zinc-400 hover:text-white font-bold text-xl cursor-pointer">&times;</button>
+                <button id="close-themes-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
             </div>
             <div class="flex flex-col gap-4 text-sm">
                 <div>
                     <label class="font-semibold text-zinc-400 block mb-2">Preset Themes</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#000000" data-text="#00ffcc">Matrix Green</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#181825" data-text="#cba6f7">Purple Dream</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#280d0f" data-text="#fca5a5">Sunset Red</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#1c1917" data-text="#fde047">Solarized Gold</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#064e3b" data-text="#6ee7b7">Emerald Forest</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#09090b" data-text="#ffffff">Clean Dark</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#000000" data-text="#00ffcc">Matrix Green</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#f4f4f5" data-text="#18181b">Light Mode</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#0f172a" data-text="#38bdf8">Midnight Blue</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#181825" data-text="#cba6f7">Purple Dream</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#280d0f" data-text="#fca5a5">Sunset Red</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#1c1917" data-text="#fde047">Solarized Gold</button>
+                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition" data-bg="#064e3b" data-text="#6ee7b7">Emerald Forest</button>
                     </div>
                 </div>
                 <hr class="border-zinc-800">
@@ -136,6 +105,16 @@
                         <input type="color" id="picker-text" value="#ffffff" class="w-10 h-8 rounded bg-transparent cursor-pointer">
                     </div>
                 </div>
+                <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-zinc-400">Font Family</label>
+                    <select id="font-select" class="bg-zinc-800 border border-zinc-700 rounded p-2 text-white">
+                        <option value="'Lexend', sans-serif">Lexend</option>
+                        <option value="ui-sans-serif, system-ui, sans-serif">Standard Sans</option>
+                        <option value="monospace">Monospace</option>
+                        <option value="Impact, sans-serif">Impact / Bold</option>
+                        <option value="Georgia, serif">Serif</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -145,19 +124,10 @@
         <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-2xl w-80 shadow-2xl flex flex-col gap-4 text-white">
             <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
                 <h3 class="font-bold text-lg">Clock Options</h3>
-                <button id="close-settings-modal" class="text-zinc-400 hover:text-white font-bold text-xl cursor-pointer">&times;</button>
+                <button id="close-settings-modal" class="text-zinc-400 hover:text-white font-bold text-xl">&times;</button>
             </div>
             <div class="flex flex-col gap-3 text-sm">
-                <div class="flex flex-col gap-1">
-                    <label class="font-semibold text-zinc-400">Time Zone</label>
-                    <select id="opt-timezone" class="bg-zinc-800 border border-zinc-700 rounded p-2 text-white cursor-pointer">
-                        <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                        <option value="America/New_York">Eastern Time (ET)</option>
-                        <option value="UTC">UTC</option>
-                        <option value="local">Device Local Time</option>
-                    </select>
-                </div>
-                <label class="flex items-center gap-2 cursor-pointer mt-1"><input type="checkbox" id="opt-12hr" checked class="rounded bg-zinc-800 border-zinc-700"> 12-Hour Format</label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-12hr" checked class="rounded bg-zinc-800 border-zinc-700"> 12-Hour Format</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-ampm" checked class="rounded bg-zinc-800 border-zinc-700"> Show AM/PM</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-seconds" checked class="rounded bg-zinc-800 border-zinc-700"> Show Seconds</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-date" checked class="rounded bg-zinc-800 border-zinc-700"> Show Date</label>
@@ -184,6 +154,7 @@
             }, 3000);
         }
 
+        // Streamlined clock loop
         function runClock() {
             const timeMainEl = document.getElementById('time-main');
             const timeAmpmEl = document.getElementById('am-pm-trigger');
@@ -196,25 +167,12 @@
             const optDate = document.getElementById('opt-date');
             const optWeek = document.getElementById('opt-week');
             const optTabSeconds = document.getElementById('opt-tabseconds');
-            const optTimezone = document.getElementById('opt-timezone');
 
             function update() {
                 const now = new Date();
-                const tz = optTimezone ? optTimezone.value : 'America/Los_Angeles';
-
-                let targetDate = now;
-                if (tz !== 'local') {
-                    try {
-                        const tzString = now.toLocaleString('en-US', { timeZone: tz });
-                        targetDate = new Date(tzString);
-                    } catch(e) {
-                        targetDate = now;
-                    }
-                }
-
-                let h = targetDate.getHours();
-                let m = targetDate.getMinutes();
-                let s = targetDate.getSeconds();
+                let h = now.getHours();
+                let m = now.getMinutes();
+                let s = now.getSeconds();
                 let period = "";
 
                 const use12 = opt12hr ? opt12hr.checked : true;
@@ -241,13 +199,7 @@
 
                 if (dateDisplayEl) {
                     const options = { weekday: 'long', month: 'long', day: 'numeric' };
-                    dateDisplayEl.textContent = targetDate.toLocaleDateString('en-US', options);
-                }
-
-                if (optTabSeconds && optTabSeconds.checked) {
-                    document.title = `${hh}:${mm}:${ss} - Home - TeachTCI`;
-                } else {
-                    document.title = "Home - TeachTCI";
+                    dateDisplayEl.textContent = now.toLocaleDateString('en-US', options);
                 }
             }
 
@@ -261,12 +213,160 @@
             runClock();
         }
 
+        // UI Event Handlers
         window.addEventListener('DOMContentLoaded', () => {
-            // Font Cycling Button Logic
-            const fonts = [
-                { name: 'Lexend', val: "'Lexend', sans-serif" },
-                { name: 'Standard Sans', val: "ui-sans-serif, system-ui, sans-serif" },
-                { name: 'Monospace', val: "monospace" },
-                { name: 'Serif', val: "Georgia, serif" }
-            ];
-            le
+            const timeAmpmEl = document.getElementById('am-pm-trigger');
+            if (timeAmpmEl) {
+                timeAmpmEl.addEventListener('click', () => {
+                    document.getElementById('clock-view').classList.add('hidden');
+                    document.getElementById('embedder-view').classList.remove('hidden');
+                });
+            }
+
+            const backToClockBtn = document.getElementById('back-to-clock');
+            if (backToClockBtn) {
+                backToClockBtn.addEventListener('click', () => {
+                    document.getElementById('embedder-view').classList.add('hidden');
+                    document.getElementById('clock-view').classList.remove('hidden');
+                });
+            }
+
+            let isHeartRed = false;
+            const btnHeart = document.getElementById('btn-heart');
+            if (btnHeart) {
+                btnHeart.addEventListener('click', () => {
+                    isHeartRed = !isHeartRed;
+                    const icon = document.getElementById('heart-icon');
+                    if (isHeartRed) {
+                        icon.setAttribute('fill', 'currentColor');
+                        icon.classList.add('text-red-500');
+                        showToast("Favorited", "Added to favorites!");
+                    } else {
+                        icon.setAttribute('fill', 'none');
+                        icon.classList.remove('text-red-500');
+                        showToast("Removed", "Removed from favorites.");
+                    }
+                });
+            }
+
+            const btnFullscreen = document.getElementById('btn-fullscreen');
+            if (btnFullscreen) {
+                btnFullscreen.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => alert(err.message));
+                    } else {
+                        if (document.exitFullscreen) document.exitFullscreen();
+                    }
+                });
+            }
+
+            let isCompact = false;
+            const btnMaximize = document.getElementById('btn-maximize');
+            const timeMainEl = document.getElementById('time-main');
+            if (btnMaximize && timeMainEl) {
+                btnMaximize.addEventListener('click', () => {
+                    isCompact = !isCompact;
+                    if (isCompact) {
+                        timeMainEl.classList.replace('text-7xl', 'text-4xl');
+                        timeMainEl.classList.replace('md:text-9xl', 'md:text-6xl');
+                        showToast("Minimized", "Compact view enabled.");
+                    } else {
+                        timeMainEl.classList.replace('text-4xl', 'text-7xl');
+                        timeMainEl.classList.replace('md:text-6xl', 'md:text-9xl');
+                        showToast("Maximize", "Normal view restored.");
+                    }
+                });
+            }
+
+            const themesModal = document.getElementById('themes-modal');
+            const settingsModal = document.getElementById('settings-modal');
+
+            const btnThemes = document.getElementById('btn-themes');
+            if (btnThemes && themesModal) {
+                btnThemes.addEventListener('click', () => themesModal.classList.replace('hidden', 'flex'));
+            }
+            const closeThemes = document.getElementById('close-themes-modal');
+            if (closeThemes && themesModal) {
+                closeThemes.addEventListener('click', () => themesModal.classList.replace('flex', 'hidden'));
+            }
+
+            const btnSettings = document.getElementById('btn-settings');
+            if (btnSettings && settingsModal) {
+                btnSettings.addEventListener('click', () => settingsModal.classList.replace('hidden', 'flex'));
+            }
+            const closeSettings = document.getElementById('close-settings-modal');
+            if (closeSettings && settingsModal) {
+                closeSettings.addEventListener('click', () => settingsModal.classList.replace('flex', 'hidden'));
+            }
+
+            const pickerBg = document.getElementById('picker-bg');
+            const pickerText = document.getElementById('picker-text');
+            const fontSelect = document.getElementById('font-select');
+
+            function applyTheme(bg, text) {
+                document.documentElement.style.setProperty('--custom-bg', bg);
+                document.documentElement.style.setProperty('--custom-text', text);
+                if (pickerBg) pickerBg.value = bg;
+                if (pickerText) pickerText.value = text;
+            }
+
+            if (pickerBg) pickerBg.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-bg', e.target.value));
+            if (pickerText) pickerText.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-text', e.target.value));
+            if (fontSelect) fontSelect.addEventListener('change', (e) => document.documentElement.style.setProperty('--custom-font', e.target.value));
+
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    applyTheme(btn.getAttribute('data-bg'), btn.getAttribute('data-text'));
+                });
+            });
+
+            // Function to handle creating the embedded page in about:blank
+            function triggerEmbedder() {
+                let urlInput = document.getElementById("url-target");
+                if (!urlInput) return;
+                let url = urlInput.value.trim();
+                if (!url) { showToast("Error", "URL cannot be empty."); return; }
+                showToast("Page opened!", "The page has been opened in a new about:blank tab.");
+                if (!url.startsWith("http://") && !url.startsWith("https://")) url = "https://" + url;
+                
+                // Opens about:blank and embeds the iframe cleanly
+                const win = window.open('about:blank');
+                if (win) {
+                    win.document.body.style.margin = "0";
+                    win.document.body.style.height = "100vh";
+                    let frm = win.document.createElement("iframe");
+                    frm.style.border = "none"; frm.style.width = "100%"; frm.style.height = "100%";
+                    frm.referrerPolicy = "no-referrer"; frm.allow = "fullscreen"; frm.src = url;
+                    win.document.body.appendChild(frm);
+                }
+            }
+
+            const createBtn = document.getElementById('create-btn');
+            if (createBtn) {
+                createBtn.addEventListener('click', triggerEmbedder);
+            }
+
+            // Press Enter to trigger creation automatically
+            const urlTarget = document.getElementById('url-target');
+            if (urlTarget) {
+                urlTarget.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        triggerEmbedder();
+                    }
+                });
+            }
+
+            const clearBtn = document.getElementById('clear-btn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    const input = document.getElementById("url-target");
+                    if (!input || !input.value) { showToast("Error", "Input is already empty."); return; }
+                    input.value = "";
+                    showToast("Input cleared", "The input has been cleared.");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
