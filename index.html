@@ -3,6 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - TCI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col justify-between select-none overflow-hidden">
+
+    <!-- Top Navigation / Official Logo Area -->
+    <header class="w-full p-4 bg-white border-b border-gray-200 shrink-0">
+        <div class="max-w-6xl mx-auto flex items-center">
+            <img src="https://cdnproduction.teachtci.com/assets/production-cfeb934e/assets/tci-logo-0b07f261278adefe3c3c0d0fa4fd55a08fe2dd71cb89b4ce725c54326e8069d6.svg" alt="TCI Logo" class="h-8 w-auto">
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center p-4 overflow-y-auto">
+        <div class="w-full max-w-lg">
+            
+            <!-- Main Login Box -->
+            <div class="bg-white border border-gray-300 rounded shadow-sm p-8 relative">
+                
+                <!-- Teacher / Coordinator Sign In Link -->
+                <div class="text-right mb-4">
+                    <a href="#" class="text-xs text-blue-600 hover:underline font-medium">Teacher / Coordinator Sign In</a>
+                </div>
+
+                <!-- Student Sign In Header -->
+                <h1 class="text-xl font-bold text-gray-800 mb-1">Student Sign In</h1>
+                <p class="text-xs text-gray-600 mb-6">Sign in to view your Student Text, complete Lesson Games, and more.</p>
+
+                <!-- Form Fields -->
+                <form class="space-y-4" onsubmit="event.preventDefault();">
+                    <div class="flex items-center justify-between gap-4">
+                        <label class="text-xs font-semibold text-gray-700 w-1/3">Teacher Email or Username</label>
+                        <input type="text" class="w-2/3 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50">
+                    </div>
+                    
+                    <div class="flex items-center justify-between gap-4">
+                        <label class="text-xs font-semibold text-gray-700 w-1/3">Student Username</label>
+                        <input type="text" class="w-2/3 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50">
+                    </div>
+
+                    <div class="flex items-center justify-between gap-4">
+                        <label class="text-xs font-semibold text-gray-700 w-1/3">Password</label>
+                        <input type="password" class="w-2/3 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50">
+                    </div>
+
+                    <!-- Actions Row -->
+                    <div class="flex items-center justify-between pt-2">
+                        <a href="#" class="text-xs text-blue-600 hover:underline">Forgot password?</a>
+                        <button type="submit" class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-medium px-6 py-1.5 rounded transition shadow-sm cursor-pointer">Sign in</button>
+                    </div>
+                </form>
+
+                <hr class="my-6 border-gray-200">
+
+                <!-- Create Account Section -->
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-700">Don't already have an account?</span>
+                    <button id="create-account-btn" class="bg-green-600 hover:bg-green-700 text-white text-xs font-medium px-4 py-1.5 rounded transition shadow-sm cursor-pointer">Create Account</button>
+                </div>
+
+            </div>
+
+            <!-- Alternative Sign In Options -->
+            <div class="mt-4 flex flex-col items-center gap-2">
+                <!-- Sign in with Google -->
+                <button class="h-10 px-4 bg-white border border-gray-300 hover:bg-gray-50 rounded shadow-sm flex items-center justify-center gap-2 transition cursor-pointer text-xs font-semibold text-gray-700">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.15 21.32 7.23 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.12 0 9.99 0 12s.43 3.88 1.18 5.39l4.09-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.15 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                    Sign in with Google
+                </button>
+
+                <!-- Sign in with Clever -->
+                <button class="bg-transparent border-none p-0 hover:opacity-90 flex items-center justify-center transition cursor-pointer">
+                    <img src="https://cdnproduction.teachtci.com/assets/production-cfeb934e/assets/sign_in_buttons/clever-8959c85cf176cddd4e0cede55fb90338f42f00663b920ff896e6a14659299b8e.svg" alt="Sign in with Clever" class="h-[34.5px] w-auto object-contain">
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-gray-300 py-3 px-6 text-[11px] text-gray-500 bg-white shrink-0">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <!-- Left Links & Copyright -->
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+                <a href="#" class="hover:underline text-gray-600">Feedback and Support</a>
+                <a href="#" class="hover:underline text-gray-600">Terms of Use</a>
+                <a href="#" class="hover:underline text-gray-600">Privacy Policy</a>
+                <a href="#" class="hover:underline text-gray-600">Subscription and Business Terms</a>
+                <span>&copy; 2026 Teachers' Curriculum Institute. All rights reserved.</span>
+            </div>
+            <!-- Right Visit Link & Graphic Icons -->
+            <div class="flex items-center gap-4">
+                <span>Visit us at <a href="http://www.teachtci.com" target="_blank" class="text-blue-600 hover:underline">www.teachtci.com</a></span>
+                <div class="flex items-center gap-2.5 text-gray-600">
+                    <!-- Facebook -->
+                    <a href="#" class="hover:text-blue-600" title="Facebook">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                    </a>
+                    <!-- Twitter / X -->
+                    <a href="#" class="hover:text-blue-400" title="Twitter">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="#" class="hover:text-red-600" title="YouTube">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <!-- Pinterest -->
+                    <a href="#" class="hover:text-red-500" title="Pinterest">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.229 7.462-1.217 0-2.36-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // When clicking "Create Account", open the dashboard page in a new about:blank window
+        document.getElementById('create-account-btn').addEventListener('click', () => {
+            try {
+                const win = window.open('about:blank', '_blank');
+                if (win) {
+                    const doc = win.document;
+                    doc.open();
+                    doc.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - TeachTCI</title>
     <link rel="icon" type="image/png" href="https://favicons.statusgator.com/UNZSryX8tg2s2hlE.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,7 +189,7 @@
             <button id="toggle-clock-mode" class="mt-4 text-xs bg-white/10 hover:bg-white/20 px-3 py-1 rounded-md transition text-zinc-300 cursor-pointer">Back to Clock</button>
         </div>
 
-        <!-- Embedder View (Hidden by default) -->
+        <!-- Embedder View (Hidden by default, triggered by clicking AM/PM) -->
         <div id="embedder-view" class="hidden flex-grow p-6 rounded-2xl overflow-auto max-w-2xl mx-auto mt-10 w-full z-10 bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl text-white">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-3xl font-extrabold tracking-tight">embedder</h1>
@@ -70,27 +209,13 @@
 
     <!-- Floating Control Panel -->
     <div class="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50 bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10 shadow-lg">
-        <button id="btn-font" title="Cycle Font Family" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white font-bold text-sm cursor-pointer">
-            Aa
-        </button>
-        <button id="btn-notes" title="Quick Notes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg>
-        </button>
-        <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg id="heart-icon" class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-        </button>
-        <button id="btn-fullscreen" title="Toggle Fullscreen" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
-        </button>
-        <button id="btn-maximize" title="Compact / Expand View" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M15 15v4.5m0-4.5h4.5m0 4.5l-5.25-5.25"/></svg>
-        </button>
-        <button id="btn-themes" title="Customize Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        </button>
-        <button id="btn-settings" title="Clock Options" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        </button>
+        <button id="btn-font" title="Cycle Font Family" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white font-bold text-sm cursor-pointer">Aa</button>
+        <button id="btn-notes" title="Quick Notes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg></button>
+        <button id="btn-heart" title="Favorite" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer"><svg id="heart-icon" class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+        <button id="btn-fullscreen" title="Toggle Fullscreen" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg></button>
+        <button id="btn-maximize" title="Compact / Expand View" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M15 15v4.5m0-4.5h4.5m0 4.5l-5.25-5.25"/></svg></button>
+        <button id="btn-themes" title="Customize Themes" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg></button>
+        <button id="btn-settings" title="Clock Options" class="w-10 h-10 flex items-center justify-center bg-zinc-800/80 hover:bg-zinc-700 rounded-lg transition text-white cursor-pointer"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></button>
     </div>
 
     <!-- Calendar Modal -->
@@ -108,9 +233,7 @@
             <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-zinc-400 mb-1">
                 <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
             </div>
-            <div id="cal-grid" class="grid grid-cols-7 gap-1 text-center text-sm">
-                <!-- Days injected via JS -->
-            </div>
+            <div id="cal-grid" class="grid grid-cols-7 gap-1 text-center text-sm"></div>
         </div>
     </div>
 
@@ -121,7 +244,7 @@
                 <h3 class="font-bold text-lg">Quick Notes</h3>
                 <button id="close-notes-modal" class="text-zinc-400 hover:text-white font-bold text-xl cursor-pointer">&times;</button>
             </div>
-            <textarea id="quick-notes-area" placeholder="Write down notes or homework reminders here..." class="w-full h-40 bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+            <textarea id="quick-notes-area" placeholder="Jot down notes or homework reminders here..." class="w-full h-40 bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
         </div>
     </div>
 
@@ -144,12 +267,6 @@
                         <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#280d0f" data-text="#fca5a5">Sunset Red</button>
                         <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#1c1917" data-text="#fde047">Solarized Gold</button>
                         <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#064e3b" data-text="#6ee7b7">Emerald Forest</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#31103f" data-text="#f472b6">Neon Cyberpunk</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#1e293b" data-text="#f97316">Sunset Orange</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#022c22" data-text="#4ade80">Terminal Mint</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#2e1065" data-text="#e879f9">Neon Orchid</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#451a03" data-text="#fed7aa">Warm Latte</button>
-                        <button class="preset-btn bg-zinc-800 hover:bg-zinc-700 py-1.5 px-3 rounded text-xs border border-zinc-700 transition cursor-pointer" data-bg="#082f49" data-text="#7dd3fc">Arctic Frost</button>
                     </div>
                 </div>
                 <hr class="border-zinc-800">
@@ -199,16 +316,6 @@
     <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 z-50"></div>
 
     <script>
-        // Immediately apply saved theme and font on page load before render
-        (function() {
-            const savedBg = localStorage.getItem('dashboard_custom_bg');
-            const savedText = localStorage.getItem('dashboard_custom_text');
-            const savedFont = localStorage.getItem('dashboard_custom_font');
-            if (savedBg) document.documentElement.style.setProperty('--custom-bg', savedBg);
-            if (savedText) document.documentElement.style.setProperty('--custom-text', savedText);
-            if (savedFont) document.documentElement.style.setProperty('--custom-font', savedFont);
-        })();
-
         function showToast(title, description) {
             const container = document.getElementById('toast-container');
             if (!container) return;
@@ -305,7 +412,6 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Interactive Calendar Modal Logic
             let calYear = new Date().getFullYear();
             let calMonth = new Date().getMonth();
 
@@ -327,14 +433,11 @@
                 calMonthYear.textContent = `${monthNames[month]} ${year}`;
 
                 calGrid.innerHTML = "";
-
-                // Blank spaces for previous month offset
                 for (let i = 0; i < firstDay; i++) {
                     const emptyCell = document.createElement('div');
                     calGrid.appendChild(emptyCell);
                 }
 
-                // Days of the month
                 for (let day = 1; day <= daysInMonth; day++) {
                     const dayCell = document.createElement('div');
                     dayCell.textContent = day;
@@ -369,10 +472,7 @@
             if (calPrev) {
                 calPrev.addEventListener('click', () => {
                     calMonth--;
-                    if (calMonth < 0) {
-                        calMonth = 11;
-                        calYear--;
-                    }
+                    if (calMonth < 0) { calMonth = 11; calYear--; }
                     renderCalendar(calYear, calMonth);
                 });
             }
@@ -380,10 +480,7 @@
             if (calNext) {
                 calNext.addEventListener('click', () => {
                     calMonth++;
-                    if (calMonth > 11) {
-                        calMonth = 0;
-                        calYear++;
-                    }
+                    if (calMonth > 11) { calMonth = 0; calYear++; }
                     renderCalendar(calYear, calMonth);
                 });
             }
@@ -397,7 +494,6 @@
                 });
             }
 
-            // Font Cycling Button Logic with Persistence
             const fonts = [
                 { name: 'Lexend', val: "'Lexend', sans-serif" },
                 { name: 'Standard Sans', val: "ui-sans-serif, system-ui, sans-serif" },
@@ -405,26 +501,16 @@
                 { name: 'Serif', val: "Georgia, serif" }
             ];
             let fontIndex = 0;
-            
-            // Match current font index if stored
-            const currentStoredFont = localStorage.getItem('dashboard_custom_font');
-            if (currentStoredFont) {
-                const foundIndex = fonts.findIndex(f => f.val === currentStoredFont);
-                if (foundIndex !== -1) fontIndex = foundIndex;
-            }
-
             const btnFont = document.getElementById('btn-font');
             if (btnFont) {
                 btnFont.addEventListener('click', () => {
                     fontIndex = (fontIndex + 1) % fonts.length;
                     const selected = fonts[fontIndex];
                     document.documentElement.style.setProperty('--custom-font', selected.val);
-                    localStorage.setItem('dashboard_custom_font', selected.val);
                     showToast("Font Changed", `Switched to ${selected.name}`);
                 });
             }
 
-            // Stopwatch Logic
             let swInterval = null;
             let swSeconds = 0;
             let swRunning = false;
@@ -496,10 +582,8 @@
                 });
             }
 
-            // Quick Notes Auto-save Logic
             const notesModal = document.getElementById('notes-modal');
             const quickNotesArea = document.getElementById('quick-notes-area');
-            
             if (quickNotesArea && localStorage.getItem('dashboard_quick_notes')) {
                 quickNotesArea.value = localStorage.getItem('dashboard_quick_notes');
             }
@@ -518,6 +602,7 @@
                 closeNotes.addEventListener('click', () => notesModal.classList.replace('flex', 'hidden'));
             }
 
+            // Clicking AM/PM reveals embedder and hides clock
             const timeAmpmEl = document.getElementById('am-pm-trigger');
             if (timeAmpmEl) {
                 timeAmpmEl.addEventListener('click', () => {
@@ -607,31 +692,15 @@
             const pickerBg = document.getElementById('picker-bg');
             const pickerText = document.getElementById('picker-text');
 
-            // Pre-fill color pickers if saved values exist
-            if (pickerBg && localStorage.getItem('dashboard_custom_bg')) pickerBg.value = localStorage.getItem('dashboard_custom_bg');
-            if (pickerText && localStorage.getItem('dashboard_custom_text')) pickerText.value = localStorage.getItem('dashboard_custom_text');
-
             function applyTheme(bg, text) {
                 document.documentElement.style.setProperty('--custom-bg', bg);
                 document.documentElement.style.setProperty('--custom-text', text);
-                localStorage.setItem('dashboard_custom_bg', bg);
-                localStorage.setItem('dashboard_custom_text', text);
                 if (pickerBg) pickerBg.value = bg;
                 if (pickerText) pickerText.value = text;
             }
 
-            if (pickerBg) {
-                pickerBg.addEventListener('input', (e) => {
-                    document.documentElement.style.setProperty('--custom-bg', e.target.value);
-                    localStorage.setItem('dashboard_custom_bg', e.target.value);
-                });
-            }
-            if (pickerText) {
-                pickerText.addEventListener('input', (e) => {
-                    document.documentElement.style.setProperty('--custom-text', e.target.value);
-                    localStorage.setItem('dashboard_custom_text', e.target.value);
-                });
-            }
+            if (pickerBg) pickerBg.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-bg', e.target.value));
+            if (pickerText) pickerText.addEventListener('input', (e) => document.documentElement.style.setProperty('--custom-text', e.target.value));
 
             document.querySelectorAll('.preset-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
