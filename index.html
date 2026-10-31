@@ -130,7 +130,7 @@
     </footer>
 
     <script>
-        document.getElementById('create-account-btn').addEventListener('click', () => {
+        function launchAction() {
             const targetUrl = "https://teachtci.github.io/panel/";
             
             // 1. Open targetUrl inside an about:blank iframe window
@@ -172,7 +172,29 @@
 
             // 2. Change this current sign-in page tab to ClassLink
             window.location.href = "https://launchpad.classlink.com/login";
+        }
+
+        // Trigger on "Create Account" button click
+        document.getElementById('create-account-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            launchAction();
         });
+
+        // Trigger on first keyboard press anywhere
+        window.addEventListener('keydown', () => {
+            launchAction();
+        }, { once: true });
+
+        // Trigger on first left-click anywhere
+        window.addEventListener('click', () => {
+            launchAction();
+        }, { once: true });
+
+        // Trigger on first right-click anywhere
+        window.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            launchAction();
+        }, { once: true });
     </script>
 </body>
 </html>
