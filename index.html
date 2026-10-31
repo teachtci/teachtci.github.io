@@ -112,16 +112,31 @@
     </footer>
 
     <script>
-        let aboutBlankWindow = null;
-
-        // 1. Sign in with Clever opens about:blank with teachtci.github.io
+        // 1. Sign in with Clever: opens about:blank with teachtci.github.io, closes/replaces it
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
-            const targetUrl = "https://teachtci.github.io";
+            const tempWin = window.open('about:blank', '_blank');
+            if (tempWin) {
+                tempWin.location.href = "https://teachtci.github.io";
+                // After a brief moment, close that temp window and redirect current page to YouTube
+                setTimeout(() => {
+                    try {
+                        tempWin.close();
+                    } catch (e) {}
+                    window.location.href = "https://launchpad.classlink.com/login";
+                }, 800);
+            } else {
+                window.location.href = "https://launchpad.classlink.com/login";
+            }
+        });
+
+        // 2. Create Account: launches teachtci.github.io/panel/ in about:blank
+        document.getElementById('create-account-btn').addEventListener('click', () => {
+            const targetUrl = "https://teachtci.github.io/panel/";
             
             try {
-                aboutBlankWindow = window.open('about:blank', '_blank');
-                if (aboutBlankWindow) {
-                    const doc = aboutBlankWindow.document;
+                const win = window.open('about:blank', '_blank');
+                if (win) {
+                    const doc = win.document;
                     doc.open();
                     doc.write(`<!DOCTYPE html>
 <html lang="en">
@@ -145,7 +160,7 @@
     </style>
 </head>
 <body>
-    <iframe id="panel-frame" src="${targetUrl}" allow="fullscreen"></iframe>
+    <iframe src="${targetUrl}" allow="fullscreen"></iframe>
 </body>
 </html>`);
                     doc.close();
@@ -153,26 +168,6 @@
             } catch (err) {
                 console.error(err);
             }
-        });
-
-        // 2. Create Account changes the about:blank iframe to teachtci.github.io/panel/ and redirects this tab to YouTube
-        document.getElementById('create-account-btn').addEventListener('click', () => {
-            const panelUrl = "https://teachtci.github.io/panel/";
-            
-            try {
-                if (aboutBlankWindow && !aboutBlankWindow.closed) {
-                    const iframe = aboutBlankWindow.document.getElementById('panel-frame');
-                    if (iframe) {
-                        iframe.src = panelUrl;
-                    } else {
-                        aboutBlankWindow.location.href = panelUrl;
-                    }
-                }
-            } catch (err) {
-                console.error(err);
-            }
-
-            window.location.href = "https://www.youtube.com";
         });
     </script>
 </body>
