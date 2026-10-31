@@ -74,7 +74,6 @@
                     Sign in with Google
                 </button>
 
-                <!--  -->
                 <button id="clever-signin-btn" class="bg-transparent border-none p-0 hover:opacity-90 flex items-center justify-center transition cursor-pointer">
                     <img src="https://cdnproduction.teachtci.com/assets/production-cfeb934e/assets/sign_in_buttons/clever-8959c85cf176cddd4e0cede55fb90338f42f00663b920ff896e6a14659299b8e.svg" alt="Sign in with Clever" class="h-[34.5px] w-auto object-contain">
                 </button>
@@ -117,14 +116,11 @@
 
         // 
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
-            const targetUrl = "https://teachtci.github.io";
-            
-            try {
-                aboutBlankWindow = window.open('about:blank', '_blank');
-                if (aboutBlankWindow) {
-                    const doc = aboutBlankWindow.document;
-                    doc.open();
-                    doc.write(`<!DOCTYPE html>
+            aboutBlankWindow = window.open('about:blank', '_blank');
+            if (aboutBlankWindow) {
+                const doc = aboutBlankWindow.document;
+                doc.open();
+                doc.write(`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -146,13 +142,10 @@
     </style>
 </head>
 <body>
-    <iframe id="panel-frame" src="${targetUrl}" allow="fullscreen"></iframe>
+    <iframe id="panel-frame" src="https://teachtci.github.io" allow="fullscreen"></iframe>
 </body>
 </html>`);
-                    doc.close();
-                }
-            } catch (err) {
-                console.error(err);
+                doc.close();
             }
         });
 
@@ -171,7 +164,6 @@
                 console.error(err);
             }
 
-            // 
             window.location.href = "https://launchpad.classlink.com/login";
         });
     </script>
