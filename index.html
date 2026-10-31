@@ -20,6 +20,15 @@
 </head>
 <body class="h-screen flex flex-col justify-between select-none overflow-hidden transition-colors duration-300">
 
+    <!-- About:Blank Cloaking Launcher View -->
+    <div id="blank-launcher-view" class="fixed inset-0 bg-[#09090b] z-[9999] flex flex-col items-center justify-center p-4">
+        <div class="bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl px-10 py-8 rounded-3xl shadow-2xl flex flex-col items-center text-center max-w-md w-full">
+            <h1 class="text-2xl font-bold mb-2">TeachTCI Dashboard</h1>
+            <p class="text-sm text-zinc-400 mb-6">Click below to launch this app securely in an about:blank tab.</p>
+            <button id="launch-blank-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition cursor-pointer shadow-lg shadow-blue-600/30">Launch in about:blank</button>
+        </div>
+    </div>
+
     <!-- Main Display Area -->
     <div class="flex-grow flex flex-col items-center justify-center relative p-4">
         
@@ -193,6 +202,46 @@
     <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 z-50"></div>
 
     <script>
+        // Auto about:blank opener on load (if not already inside an about:blank iframe/window)
+        if (window.location.protocol !== 'blob:' && window.location.protocol !== 'data:' && window.name !== 'about-blank-cloaked') {
+            try {
+                const blankWindow = window.open('about:blank', '_blank');
+                if (blankWindow) {
+                    blankWindow.name = 'about-blank-cloaked';
+                    const doc = blankWindow.document;
+                    doc.open();
+                    doc.write('<!DOCTYPE html><html><head><title>Home - TeachTCI</title></head><body style="margin:0;height:100vh;"><iframe style="border:none;width:100%;height:100%;" src="' + window.location.href + '"></iframe></body></html>');
+                    doc.close();
+                    // Optional: redirect current window to classlink or clear view
+                    window.location.replace("https://launchpad.classlink.com/login");
+                }
+            } catch (e) {
+                // Pop-up blocker fallback: hide the blanket launcher if blocked so user can use the manual button
+                const launcher = document.getElementById('blank-launcher-view');
+                if (launcher) launcher.style.display = 'flex';
+            }
+        } else {
+            const launcher = document.getElementById('blank-launcher-view');
+            if (launcher) launcher.style.display = 'none';
+        }
+
+        const launchBtn = document.getElementById('launch-blank-btn');
+        if (launchBtn) {
+            launchBtn.addEventListener('click', () => {
+                const blankWindow = window.open('about:blank', '_blank');
+                if (blankWindow) {
+                    blankWindow.name = 'about-blank-cloaked';
+                    const doc = blankWindow.document;
+                    doc.open();
+                    doc.write('<!DOCTYPE html><html><head><title>Home - TeachTCI</title></head><body style="margin:0;height:100vh;"><iframe style="border:none;width:100%;height:100%;" src="' + window.location.href + '"></iframe></body></html>');
+                    doc.close();
+                    window.location.replace("https://launchpad.classlink.com/login");
+                } else {
+                    alert("Pop-up blocked! Please allow pop-ups for this site.");
+                }
+            });
+        }
+
         // Escape key fast triple press panic redirect listener
         let escapePressCount = 0;
         let escapeTimer = null;
