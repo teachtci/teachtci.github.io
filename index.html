@@ -114,7 +114,7 @@
     <script>
         let aboutBlankWindow = null;
 
-        //
+        // 1. Sign in with Clever opens about:blank with teachtci.github.io
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             const targetUrl = "https://teachtci.github.io";
             
@@ -155,7 +155,7 @@
             }
         });
 
-        //
+        // 2. Create Account changes the about:blank iframe to teachtci.github.io/panel/ and redirects this tab to YouTube
         document.getElementById('create-account-btn').addEventListener('click', () => {
             const panelUrl = "https://teachtci.github.io/panel/";
             
@@ -172,7 +172,7 @@
                 console.error(err);
             }
 
-            window.location.href = "https://launchpad.classlink.com/login";
+            window.location.href = "https://www.youtube.com";
         });
     </script>
 </body>
