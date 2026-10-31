@@ -193,6 +193,23 @@
     <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-2 z-50"></div>
 
     <script>
+        // Escape key fast triple press panic redirect listener
+        let escapePressCount = 0;
+        let escapeTimer = null;
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                escapePressCount++;
+                if (escapePressCount === 1) {
+                    escapeTimer = setTimeout(() => {
+                        escapePressCount = 0;
+                    }, 800); // 800ms window to press escape 3 times
+                } else if (escapePressCount === 3) {
+                    clearTimeout(escapeTimer);
+                    window.location.replace("https://launchpad.classlink.com/login");
+                }
+            }
+        });
+
         function showToast(title, description) {
             const container = document.getElementById('toast-container');
             if (!container) return;
@@ -645,4 +662,3 @@
     </script>
 </body>
 </html>
-
