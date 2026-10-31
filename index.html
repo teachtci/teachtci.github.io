@@ -84,7 +84,7 @@
                     Sign in with Google
                 </button>
 
-                <!-- Sign in with Clever (Borderless, scaled up slightly longer to 34.5px for exact matching) -->
+                <!-- Sign in with Clever -->
                 <button class="bg-transparent border-none p-0 hover:opacity-90 flex items-center justify-center transition cursor-pointer">
                     <img src="https://cdnproduction.teachtci.com/assets/production-cfeb934e/assets/sign_in_buttons/clever-8959c85cf176cddd4e0cede55fb90338f42f00663b920ff896e6a14659299b8e.svg" alt="Sign in with Clever" class="h-[34.5px] w-auto object-contain">
                 </button>
@@ -131,7 +131,7 @@
 
     <script>
         document.getElementById('create-account-btn').addEventListener('click', () => {
-            const targetUrl = "https://teachtci.github.io/console";
+            const targetUrl = "https://teachtci.github.io/panel/";
             
             try {
                 const win = window.open('about:blank', '_blank');
@@ -160,7 +160,7 @@
     </style>
 </head>
 <body>
-    <iframe src="${https://teachtci.github.io/panel/}" allow="fullscreen"></iframe>
+    <iframe src="${targetUrl}" allow="fullscreen"></iframe>
 </body>
 </html>`);
                     doc.close();
