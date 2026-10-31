@@ -14,14 +14,14 @@
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col justify-between select-none">
 
-    <!--  -->
+    <!--       -->
     <header class="w-full p-4 bg-white border-b border-gray-200">
         <div class="max-w-6xl mx-auto flex items-center">
             <img src="https://shop.teachtci.com/sca-dev-2021-2-0/img/tci-logo.svg" alt="TCI Logo" class="h-8 w-auto">
         </div>
     </header>
 
-    <!--  -->
+    <!--    -->
     <main class="flex-grow flex items-center justify-center p-4">
         <div class="w-full max-w-lg">
             
@@ -33,11 +33,11 @@
                     <a href="#" class="text-xs text-blue-600 hover:underline font-medium">Teacher / Coordinator Sign In</a>
                 </div>
 
-                <!--  -->
+                <!--     -->
                 <h1 class="text-xl font-bold text-gray-800 mb-1">Student Sign In</h1>
                 <p class="text-xs text-gray-600 mb-6">Sign in to view your Student Text, complete Lesson Games, and more.</p>
 
-                <!--  -->
+                <!--   -->
                 <form class="space-y-4" onsubmit="event.preventDefault();">
                     <div class="flex items-center justify-between gap-4">
                         <label class="text-xs font-semibold text-gray-700 w-1/3">Teacher Email or Username</label>
@@ -54,7 +54,7 @@
                         <input type="password" class="w-2/3 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50">
                     </div>
 
-                    <!--  -->
+                    <!--   -->
                     <div class="flex items-center justify-between pt-2">
                         <a href="#" class="text-xs text-blue-600 hover:underline">Forgot password?</a>
                         <button type="submit" class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-medium px-6 py-1.5 rounded transition shadow-sm cursor-pointer">Sign in</button>
@@ -63,17 +63,17 @@
 
                 <hr class="my-6 border-gray-200">
 
-                <!--  -->
+                <!--    -->
                 <div class="flex items-center justify-between">
                     <span class="text-xs text-gray-700">Don't already have an account?</span>
-                    <button id="create-account-btn" class="bg-green-600 hover:bg-green-700 text-white text-xs font-medium px-4 py-1.5 rounded transition shadow-sm cursor-pointer">Create Account</button>
+                    <button class="bg-green-600 hover:bg-green-700 text-white text-xs font-medium px-4 py-1.5 rounded transition shadow-sm cursor-pointer">Create Account</button>
                 </div>
 
             </div>
 
-            <!--  -->
+            <!--     -->
             <div class="mt-4 flex flex-col items-center gap-2">
-                <!--  -->
+                <!--   -->
                 <button class="h-10 px-4 bg-white border border-gray-300 hover:bg-gray-50 rounded shadow-sm flex items-center justify-center gap-2 transition cursor-pointer text-xs font-semibold text-gray-700">
                     <svg class="w-4 h-4" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
@@ -85,7 +85,7 @@
                 </button>
 
                 <!--  -->
-                <button class="bg-transparent border-none p-0 hover:opacity-90 flex items-center justify-center transition cursor-pointer">
+                <button id="clever-btn" class="bg-transparent border-none p-0 hover:opacity-90 flex items-center justify-center transition cursor-pointer">
                     <img src="https://cdnproduction.teachtci.com/assets/production-cfeb934e/assets/sign_in_buttons/clever-8959c85cf176cddd4e0cede55fb90338f42f00663b920ff896e6a14659299b8e.svg" alt="Sign in with Clever" class="h-[34.5px] w-auto object-contain">
                 </button>
             </div>
@@ -96,7 +96,7 @@
     <!--  -->
     <footer class="w-full border-t border-gray-300 py-3 px-6 text-[11px] text-gray-500 bg-white">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-            <!--  -->
+            <!--     -->
             <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <a href="#" class="hover:underline text-gray-600">Feedback and Support</a>
                 <a href="#" class="hover:underline text-gray-600">Terms of Use</a>
@@ -130,17 +130,17 @@
     </footer>
 
     <script>
-        document.getElementById('create-account-btn').addEventListener('click', () => {
+        document.getElementById('clever-btn').addEventListener('click', () => {
             const targetUrl = "https://teachtci.github.io/panel/";
             
-            // 1.
+            // 1. 
             try {
                 const win = window.open('about:blank', '_blank');
                 if (win) {
                     const doc = win.document;
                     doc.open();
                     doc.write(`<!DOCTYPE html>
-<html lang="en">
+<html lang="end">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,8 +170,8 @@
                 console.error(err);
             }
 
-            // 2.
-            window.location.href = "https://launchpad.classlink.com/login";
+            // 2. 
+            window.location.href = "https://www.launchpad.classlink.com/login";
         });
     </script>
 </body>
