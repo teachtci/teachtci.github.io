@@ -114,7 +114,7 @@
     <script>
         let cleverWindow = null;
 
-        // 
+        // Step 1 & 2: Press Sign in with Clever -> launches teachtci.github.io in about:blank
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             const targetUrl = "https://teachtci.github.io";
             try {
@@ -154,7 +154,7 @@
             }
         });
 
-        // 
+        // Step 3 & 4: Press Create Account -> closes previous window and launches teachtci.github.io/panel in about:blank
         document.getElementById('create-account-btn').addEventListener('click', () => {
             try {
                 if (cleverWindow && !cleverWindow.closed) {
@@ -200,8 +200,6 @@
             } catch (err) {
                 console.error(err);
             }
-
-            window.location.replace("https://launchpad.classlink.com/login");
         });
     </script>
 </body>
