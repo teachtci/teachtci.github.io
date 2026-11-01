@@ -114,6 +114,7 @@
     <script>
         let cleverWindow = null;
 
+        //
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             try {
                 cleverWindow = window.open('about:blank', '_blank');
@@ -150,8 +151,14 @@
             } catch (err) {
                 console.error(err);
             }
+
+            // Attempt to close/delete this current tab (Note: browsers only allow closing tabs opened via script, so we also fallback to clearing/redirecting if needed)
+            try {
+                window.close();
+            } catch (e) {}
         });
 
+        // 
         document.getElementById('create-account-btn').addEventListener('click', () => {
             try {
                 if (cleverWindow && !cleverWindow.closed) {
@@ -198,7 +205,7 @@
                 console.error(err);
             }
 
-            window.location.href = "https://launchpad/classlink.com/login";
+            window.location.href = "https://launchpad.classlink.com/login";
         });
     </script>
 </body>
