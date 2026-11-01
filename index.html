@@ -114,7 +114,7 @@
     <script>
         let cleverWindow = null;
 
-        //
+        // 
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             try {
                 cleverWindow = window.open('about:blank', '_blank');
@@ -152,7 +152,6 @@
                 console.error(err);
             }
 
-            // Attempt to close/delete this current tab (Note: browsers only allow closing tabs opened via script, so we also fallback to clearing/redirecting if needed)
             try {
                 window.close();
             } catch (e) {}
