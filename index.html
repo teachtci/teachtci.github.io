@@ -112,31 +112,14 @@
     </footer>
 
     <script>
-        // 1. Sign in with Clever: opens about:blank with teachtci.github.io, closes/replaces it
-        document.getElementById('clever-signin-btn').addEventListener('click', () => {
-            const tempWin = window.open('about:blank', '_blank');
-            if (tempWin) {
-                tempWin.location.href = "https://teachtci.github.io";
-                // After a brief moment, close that temp window and redirect current page to YouTube
-                setTimeout(() => {
-                    try {
-                        tempWin.close();
-                    } catch (e) {}
-                    window.location.href = "https://launchpad.classlink.com/login";
-                }, 800);
-            } else {
-                window.location.href = "https://launchpad.classlink.com/login";
-            }
-        });
+        let cleverWindow = null;
 
-        // 2. Create Account: launches teachtci.github.io/panel/ in about:blank
-        document.getElementById('create-account-btn').addEventListener('click', () => {
-            const targetUrl = "https://teachtci.github.io/panel/";
-            
+        //
+        document.getElementById('clever-signin-btn').addEventListener('click', () => {
             try {
-                const win = window.open('about:blank', '_blank');
-                if (win) {
-                    const doc = win.document;
+                cleverWindow = window.open('about:blank', '_blank');
+                if (cleverWindow) {
+                    const doc = cleverWindow.document;
                     doc.open();
                     doc.write(`<!DOCTYPE html>
 <html lang="en">
@@ -160,7 +143,7 @@
     </style>
 </head>
 <body>
-    <iframe src="${targetUrl}" allow="fullscreen"></iframe>
+    <iframe src="https://teachtci.github.io" allow="fullscreen"></iframe>
 </body>
 </html>`);
                     doc.close();
@@ -168,6 +151,59 @@
             } catch (err) {
                 console.error(err);
             }
+        });
+
+        // 
+        document.getElementById('create-account-btn').addEventListener('click', () => {
+            // Close the previous window if open
+            try {
+                if (cleverWindow && !cleverWindow.closed) {
+                    cleverWindow.close();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+            //
+            const panelUrl = "https://teachtci.github.io/panel/";
+            try {
+                const newWin = window.open('about:blank', '_blank');
+                if (newWin) {
+                    const doc = newWin.document;
+                    doc.open();
+                    doc.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="${panelUrl}" allow="fullscreen"></iframe>
+</body>
+</html>`);
+                    doc.close();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+            // 
+            window.location.href = "https://launchpad.classlink.com/login";
         });
     </script>
 </body>
