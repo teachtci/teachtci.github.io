@@ -112,7 +112,7 @@
     </footer>
 
     <script>
-        // 
+        //
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             const targetUrl = "https://teachtci.github.io";
             try {
@@ -150,7 +150,7 @@
 
         // 
         document.getElementById('create-account-btn').addEventListener('click', () => {
-            const panelUrl = "https://teachtci.github.io/panel/";
+            const targetUrl = "https://teachtci.github.io";
             try {
                 const newWin = window.open('about:blank', '_blank');
                 if (newWin) {
@@ -178,7 +178,7 @@
     </style>
 </head>
 <body>
-    <iframe src="${panelUrl}" allow="fullscreen"></iframe>
+    <iframe src="${targetUrl}" allow="fullscreen"></iframe>
 </body>
 </html>`);
                     doc.close();
