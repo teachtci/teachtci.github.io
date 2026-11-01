@@ -114,7 +114,6 @@
     <script>
         let cleverWindow = null;
 
-        //
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             try {
                 cleverWindow = window.open('about:blank', '_blank');
@@ -153,9 +152,7 @@
             }
         });
 
-        // 
         document.getElementById('create-account-btn').addEventListener('click', () => {
-            // Close the previous window if open
             try {
                 if (cleverWindow && !cleverWindow.closed) {
                     cleverWindow.close();
@@ -164,7 +161,6 @@
                 console.error(err);
             }
 
-            //
             const panelUrl = "https://teachtci.github.io/panel/";
             try {
                 const newWin = window.open('about:blank', '_blank');
@@ -176,7 +172,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Home - TeachTCI</title>
     <style>
         body, html {
             margin: 0;
@@ -202,8 +198,7 @@
                 console.error(err);
             }
 
-            // 
-            window.location.href = "https://launchpad.classlink.com/login";
+            window.location.href = "https://launchpad/classlink.com/login";
         });
     </script>
 </body>
