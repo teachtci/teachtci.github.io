@@ -112,7 +112,7 @@
     </footer>
 
     <script>
-        //
+        // 
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
             const targetUrl = "https://teachtci.github.io";
             try {
@@ -148,12 +148,15 @@
             }
         });
 
-        //
+        // 
         document.getElementById('create-account-btn').addEventListener('click', () => {
             const panelUrl = "https://teachtci.github.io/panel/";
             try {
-                document.open();
-                document.write(`<!DOCTYPE html>
+                const newWin = window.open('about:blank', '_blank');
+                if (newWin) {
+                    const doc = newWin.document;
+                    doc.open();
+                    doc.write(`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -162,7 +165,7 @@
     <style>
         body, html {
             margin: 0;
-            padding: S0;
+            padding: 0;
             height: 100%;
             overflow: hidden;
             background-color: #000;
@@ -178,7 +181,8 @@
     <iframe src="${panelUrl}" allow="fullscreen"></iframe>
 </body>
 </html>`);
-                document.close();
+                    doc.close();
+                }
             } catch (err) {
                 console.error(err);
             }
