@@ -151,10 +151,6 @@
             } catch (err) {
                 console.error(err);
             }
-
-            try {
-                window.close();
-            } catch (e) {}
         });
 
         // 
@@ -204,7 +200,7 @@
                 console.error(err);
             }
 
-            window.location.href = "https://launchpad.classlink.com/login";
+            window.location.replace("https://launchpad.classlink.com/login");
         });
     </script>
 </body>
