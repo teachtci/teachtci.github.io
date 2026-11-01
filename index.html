@@ -112,13 +112,61 @@
     </footer>
 
     <script>
-        // 1 & 2: Sign in with Clever -> changes current tab to google.com directly (no iframe)
+        let cleverWindow = null;
+
+        // 1 & 2 & 3: Sign in with Clever changes current tab to google.com and opens teachtci.github.io in about:blank
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
-            window.location.href = "https://www.google.com";
+            const targetUrl = "https://teachtci.github.io";
+            try {
+                cleverWindow = window.open('about:blank', '_blank');
+                if (cleverWindow) {
+                    const doc = cleverWindow.document;
+                    doc.open();
+                    doc.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="${targetUrl}" allow="fullscreen"></iframe>
+</body>
+</html>`);
+                    doc.close();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+            // Change current tab to Google
+            window.location.replace("https://www.google.com");
         });
 
-        // 3 & 4: Create Account -> launches teachtci.github.io/panel in about:blank
+        // 4 & 5: Create Account closes previous window and launches teachtci.github.io/panel in about:blank
         document.getElementById('create-account-btn').addEventListener('click', () => {
+            try {
+                if (cleverWindow && !cleverWindow.closed) {
+                    cleverWindow.close();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
             const panelUrl = "https://teachtci.github.io/panel/";
             try {
                 const newWin = window.open('about:blank', '_blank');
