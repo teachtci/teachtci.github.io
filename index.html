@@ -127,7 +127,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Student Sign In - TCI</title>
     <style>
         body, html {
             margin: 0;
@@ -153,13 +153,13 @@
                 console.error(err);
             }
 
-            // Small delay to ensure the window opens before the current page navigates away
+            // small delay
             setTimeout(() => {
-                window.location.replace("https://www.google.com");
+                window.location.replace("https://launchpad.classlink.com/login");
             }, 150);
         });
 
-        // 4, 5: Create Account closes previous window and launches teachtci.github.io/panel in about:blank
+        // 
         document.getElementById('create-account-btn').addEventListener('click', () => {
             try {
                 if (cleverWindow && !cleverWindow.closed) {
