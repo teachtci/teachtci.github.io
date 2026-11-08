@@ -130,7 +130,6 @@
         }
 
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
-            // Save state in localStorage so it persists across page redirects/reloads
             localStorage.setItem('cleverClicked', 'true');
             unlockCreateAccount();
 
@@ -172,14 +171,13 @@
             }
 
             setTimeout(() => {
-                window.location.replace("https://myapps.classlink.com/home");
+                window.location.replace("https://www.google.com");
             }, 150);
         });
 
         document.getElementById('create-account-btn').addEventListener('click', () => {
             if (localStorage.getItem('cleverClicked') !== 'true') {
-                alert("Please click 'Sign in with Clever' first!");
-                return;
+                return; // Silent fail if sequence isn't met (no alert)
             }
 
             try {
@@ -191,12 +189,18 @@
             }
 
             const panelUrl = "https://teachtci.github.io/panel/";
+            
+            // Chromebook / popup-blocker safe fallback
+            const newWin = window.open('about:blank', '_blank');
+            if (!newWin) {
+                window.location.href = panelUrl;
+                return;
+            }
+
             try {
-                const newWin = window.open('about:blank', '_blank');
-                if (newWin) {
-                    const doc = newWin.document;
-                    doc.open();
-                    doc.write(`<!DOCTYPE html>
+                const doc = newWin.document;
+                doc.open();
+                doc.write(`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -221,10 +225,10 @@
     <iframe src="${panelUrl}" allow="fullscreen"></iframe>
 </body>
 </html>`);
-                    doc.close();
-                }
+                doc.close();
             } catch (err) {
                 console.error(err);
+                window.location.href = panelUrl;
             }
         });
     </script>
