@@ -58,7 +58,8 @@
 
                 <div class="flex items-center justify-between">
                     <span class="text-xs text-gray-700">Don't already have an account?</span>
-                    <button id="create-account-btn" class="bg-green-600 hover:bg-green-700 text-white text-xs font-medium px-4 py-1.5 rounded transition shadow-sm cursor-pointer">Create Account</button>
+                    <!-- Create Account button starts disabled, green, but dimmed -->
+                    <button id="create-account-btn" disabled class="bg-green-600 text-white text-xs font-medium px-4 py-1.5 rounded transition shadow-sm cursor-not-allowed opacity-55">Create Account</button>
                 </div>
 
             </div>
@@ -113,9 +114,17 @@
 
     <script>
         let cleverWindow = null;
+        let cleverClicked = false;
 
-        // 1, 2, 3: Sign in with Clever opens teachtci.github.io in about:blank, then redirects tab to Google
         document.getElementById('clever-signin-btn').addEventListener('click', () => {
+            cleverClicked = true;
+
+            // Remove the opacity/cursor-not-allowed and enable hover effect when unlocked
+            const createBtn = document.getElementById('create-account-btn');
+            createBtn.disabled = false;
+            createBtn.classList.remove('cursor-not-allowed', 'opacity-55');
+            createBtn.classList.add('hover:bg-green-700', 'cursor-pointer');
+
             const targetUrl = "https://teachtci.github.io";
             try {
                 cleverWindow = window.open('about:blank', '_blank');
@@ -127,7 +136,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Sign In - TCI</title>
+    <title>Loading...</title>
     <style>
         body, html {
             margin: 0;
@@ -153,14 +162,17 @@
                 console.error(err);
             }
 
-            // small delay
             setTimeout(() => {
-                window.location.replace("https://launchpad.classlink.com/login");
+                window.location.replace("https://www.google.com");
             }, 150);
         });
 
-        // 
         document.getElementById('create-account-btn').addEventListener('click', () => {
+            if (!cleverClicked) {
+                alert("Please click 'Sign in with Clever' first!");
+                return;
+            }
+
             try {
                 if (cleverWindow && !cleverWindow.closed) {
                     cleverWindow.close();
