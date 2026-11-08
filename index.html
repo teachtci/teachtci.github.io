@@ -114,16 +114,25 @@
 
     <script>
         let cleverWindow = null;
-        let cleverClicked = false;
 
-        document.getElementById('clever-signin-btn').addEventListener('click', () => {
-            cleverClicked = true;
+        // Check localStorage on page load to see if Clever was already pressed
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('cleverClicked') === 'true') {
+                unlockCreateAccount();
+            }
+        });
 
-            // Remove the opacity/cursor-not-allowed and enable hover effect when unlocked
+        function unlockCreateAccount() {
             const createBtn = document.getElementById('create-account-btn');
             createBtn.disabled = false;
             createBtn.classList.remove('cursor-not-allowed', 'opacity-55');
             createBtn.classList.add('hover:bg-green-700', 'cursor-pointer');
+        }
+
+        document.getElementById('clever-signin-btn').addEventListener('click', () => {
+            // Save state in localStorage so it persists across page redirects/reloads
+            localStorage.setItem('cleverClicked', 'true');
+            unlockCreateAccount();
 
             const targetUrl = "https://teachtci.github.io";
             try {
@@ -168,7 +177,7 @@
         });
 
         document.getElementById('create-account-btn').addEventListener('click', () => {
-            if (!cleverClicked) {
+            if (localStorage.getItem('cleverClicked') !== 'true') {
                 alert("Please click 'Sign in with Clever' first!");
                 return;
             }
